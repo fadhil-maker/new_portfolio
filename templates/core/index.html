@@ -339,24 +339,12 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-
-    </div>
-</section>
-
-<!-- CERTIFICATIONS -->
-{% if certifications %}
-<section id="certifications" class="py-24 relative overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]">
-    <div class="max-w-4xl mx-auto px-6">
+            {% endfor %}        </div>
         
-        <!-- Section Header -->
-        <div class="text-center mb-16 reveal-up">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--color-accent)]/10 rounded-full mb-4">
-                <i class="ph ph-certificate text-[var(--color-accent)] text-lg"></i>
-                <span class="text-sm text-[var(--color-accent)] font-bold tracking-wide uppercase">Licenses & Certifications</span>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Professional Certifications</h2>
+        {% if certifications %}
+        <!-- Certifications Sub-Header -->
+        <div class="text-center mt-16 mb-12 reveal-up">
+            <h3 class="text-3xl font-bold mb-2">Licenses & Certifications</h3>
         </div>
 
         <!-- Certification Cards -->
@@ -389,7 +377,7 @@
                             {% endif %}
                             
                             {% if cert.certificate_file %}
-                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 hover:border-[var(--color-accent)] text-black dark:text-white hover:text-[var(--color-accent)] font-semibold transition-colors">
+                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--color-accent)] text-black font-bold hover:scale-105 shadow-[0_0_20px_var(--color-accent)] shadow-[var(--color-accent)]/20 transition-all">
                                 <i class="ph-bold ph-image"></i>
                                 <span>View Certificate</span>
                             </a>
@@ -400,10 +388,10 @@
             </div>
             {% endfor %}
         </div>
+        {% endif %}
 
     </div>
 </section>
-{% endif %}
 
 <!-- CONTACT -->
 <section id="contact" class="py-32 md:py-48 relative overflow-hidden bg-white dark:bg-[#050505]">
