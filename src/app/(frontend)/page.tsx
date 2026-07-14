@@ -244,9 +244,9 @@ export default async function Home() {
                  <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
                  <p className="text-[var(--color-text-secondary)] font-semibold text-lg mb-4">{exp.company}</p>
                  <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6 whitespace-pre-wrap">{exp.description}</p>
-                 {exp.technologies && exp.technologies.length > 0 && (
+                 {exp.technologies && (
                    <div className="flex flex-wrap gap-2 mb-6">
-                     {exp.technologies.map((tech: string, tIdx: number) => (
+                     {(Array.isArray(exp.technologies) ? exp.technologies : exp.technologies.split(',').map((t: string) => t.trim())).map((tech: string, tIdx: number) => (
                        <span key={tIdx} className="text-xs font-semibold px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                          {tech}
                        </span>
@@ -280,9 +280,9 @@ export default async function Home() {
                      <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
                      <p className="text-[var(--color-text-secondary)] font-semibold text-lg mb-4">{exp.company}</p>
                      <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6 whitespace-pre-wrap">{exp.description}</p>
-                     {exp.technologies && exp.technologies.length > 0 && (
+                     {exp.technologies && (
                        <div className="flex flex-wrap gap-2 mb-6">
-                         {exp.technologies.map((tech: string, tIdx: number) => (
+                         {(Array.isArray(exp.technologies) ? exp.technologies : exp.technologies.split(',').map((t: string) => t.trim())).map((tech: string, tIdx: number) => (
                            <span key={tIdx} className="text-xs font-semibold px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
                              {tech}
                            </span>
