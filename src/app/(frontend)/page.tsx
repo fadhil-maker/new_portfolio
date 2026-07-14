@@ -164,8 +164,8 @@ export default async function Home() {
         </div>
         <div className="max-w-7xl mx-auto px-6 flex flex-col gap-12 pb-32">
           {projects.map((project: any, i: number) => (
-            <div key={i} className="lg:sticky transition-transform duration-500 reveal-up active" style={{ top: `calc(10vh + ${i * 40}px)`, zIndex: i + 1 }}>
-              <div className="bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-12 border border-white/40 dark:border-white/10 shadow-2xl flex flex-col lg:flex-row gap-10 md:gap-16">
+            <div key={i} className="lg:sticky transition-transform duration-500 reveal-up active" style={{ top: `calc(10vh + ${i * 40}px)`, zIndex: i + 1, ...(project.card_color ? { '--color-accent': project.card_color } as React.CSSProperties : {}) }}>
+              <div className="bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-12 border border-white/40 dark:border-white/10 shadow-2xl hover:shadow-[var(--color-accent)]/20 hover:border-[var(--color-accent)] transition-all duration-500 flex flex-col lg:flex-row gap-10 md:gap-16">
                 <div className="flex-1 flex flex-col justify-center order-2 lg:order-1">
                   <div className="mb-6">
                     <span className="text-[var(--color-accent)] font-bold tracking-widest uppercase text-sm mb-2 block">Project {project.number}</span>
@@ -290,7 +290,7 @@ export default async function Home() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {miniProjects.map((project: any, i: number) => (
-                <div key={i} className="group bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 reveal-up active border border-white/40 dark:border-white/10 hover:border-[var(--color-accent)] hover:shadow-2xl hover:shadow-[var(--color-accent)]/20">
+                <div key={i} className="group bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-transform duration-300 reveal-up active border border-white/40 dark:border-white/10 hover:border-[var(--color-accent)] hover:shadow-2xl hover:shadow-[var(--color-accent)]/20" style={project.card_color ? { '--color-accent': project.card_color } as React.CSSProperties : {}}>
                   <div className="flex justify-between items-start mb-6">
                     <h3 className="text-2xl font-display font-bold">{project.title}</h3>
                     {project.live_url && (
