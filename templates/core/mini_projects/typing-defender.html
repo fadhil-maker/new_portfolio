@@ -1,0 +1,236 @@
+{% extends "core/mini_project_base.html" %}
+
+{% block project_canvas %}
+<canvas id="defender-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
+
+<div class="absolute top-4 left-0 right-0 flex flex-col items-center gap-2 pointer-events-none z-10">
+    <div class="bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-6 py-2 text-white font-mono text-xs md:text-sm shadow-xl">
+        <span id="td-score-readout" class="text-[#ff007f]">SCORE: 0 // FIREWALL: 100%</span>
+    </div>
+    <div id="td-current-target" class="text-xl md:text-2xl font-mono font-bold tracking-[0.2em] text-[#ff007f] drop-shadow-md"></div>
+</div>
+
+<div id="td-terminal-screen" class="absolute inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center text-center p-6" style="display: flex;">
+    <h2 id="td-screen-title" class="text-3xl md:text-5xl font-display font-black text-white mb-4 tracking-wider">INITIATE DEFENSE</h2>
+    <p id="td-screen-desc" class="text-gray-300 font-mono text-sm md:text-lg mb-8 max-w-md">The firewall is under heavy DDoS attack. Rely on manual override typing to intercept packets.</p>
+    <button id="td-restart-btn" class="px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors pointer-events-auto text-sm">ENGAGE</button>
+</div>
+<input type="text" id="arcade-type-input" style="opacity:0; position:absolute; top:0; left:0; z-index:-1;">
+{% endblock %}
+
+{% block project_scripts %}
+
+<script>
+    (function() {
+        
+            const canvas = document.getElementById('defender-canvas'); if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const inputField = document.getElementById('arcade-type-input');
+            const scoreLabel = document.getElementById('td-score-readout');
+            const overScreen = document.getElementById('td-terminal-screen');
+            
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+
+            let score = 0; 
+            let safetyIntegrity = 3; 
+            let fallingWords = []; 
+            let blastSparks = [];
+            let clockTicks = 0; 
+            let sessionActive = true;
+            
+            let currentCombo = 0;
+            let currentLevel = 1;
+            let screenShakeIntensity = 0;
+
+            const dictionary = {
+                tier1: ['GIT', 'CSS', 'HTML', 'SUDO', 'BASH', 'SSH', 'PORT', 'PING'],
+                tier2: ['DJANGO', 'PYTHON', 'SERVER', 'NGINX', 'DOCKER', 'REDIS', 'LINUX'],
+                tier3: ['CLOUDFLARE', 'DATABASE', 'JAVASCRIPT', 'POSTGRES', 'METEOROLOGICAL', 'TELEMETRY']
+            };
+
+            inputField.value = "";
+
+            class TargetString {
+                constructor(isBoss = false) {
+                    this.isBoss = isBoss;
+                    let pool = dictionary.tier1;
+                    if (currentLevel === 2) pool = dictionary.tier1.concat(dictionary.tier2);
+                    if (currentLevel >= 3) pool = dictionary.tier2.concat(dictionary.tier3);
+                    
+                    this.text = this.isBoss ? 'SYSTEM_OVERRIDE_VULNERABILITY_CRITICAL' : pool[Math.floor(Math.random() * pool.length)];
+                    this.x = 40 + Math.random() * (canvas.width - 250); 
+                    this.y = -15;
+                    this.vel = (this.isBoss ? 0.4 : 0.9 + (currentLevel * 0.3) + Math.random() * 0.5);
+                    this.pulse = 0;
+                }
+                update() { 
+                    this.y += this.vel; 
+                    this.pulse += 0.05;
+                    if(this.y > canvas.height - 70) { 
+                        if (typeof AudioMatrix !== 'undefined') AudioMatrix.playError();
+                        safetyIntegrity--; 
+                        currentCombo = 0;
+                        screenShakeIntensity = 15;
+                        this.y = 99999; 
+                    } 
+                }
+                draw() { 
+                    ctx.save();
+                    if (this.isBoss) {
+                        ctx.fillStyle = `rgb(255, ${Math.floor(Math.sin(this.pulse) * 50 + 50)}, 50)`;
+                        ctx.font = 'bold 18px monospace';
+                        ctx.shadowBlur = 15; ctx.shadowColor = '#ff0000';
+                    } else {
+                        ctx.fillStyle = currentLevel === 1 ? '#ff4444' : currentLevel === 2 ? '#ffaa00' : '#ff007f';
+                        ctx.font = 'bold 14px monospace';
+                    }
+                    ctx.fillText(this.text, this.x, this.y);
+                    ctx.restore();
+                }
+            }
+
+            class ExplosionSpark {
+                constructor(x, y, color) { 
+                    this.x = x; this.y = y; 
+                    this.vx = (Math.random() - 0.5) * 12; 
+                    this.vy = (Math.random() - 0.5) * 12; 
+                    this.alpha = 1.0; 
+                    this.color = color || '#00e5ff';
+                }
+                update() { this.x += this.vx; this.y += this.vy; this.alpha -= 0.03; }
+                draw() { 
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = this.alpha;
+                    ctx.fillRect(this.x, this.y, 3, 3); 
+                    ctx.globalAlpha = 1.0;
+                }
+            }
+
+            function cycle() {
+                if (!sessionActive) return;
+
+                ctx.save();
+                if (screenShakeIntensity > 0) {
+                    const dx = (Math.random() - 0.5) * screenShakeIntensity;
+                    const dy = (Math.random() - 0.5) * screenShakeIntensity;
+                    ctx.translate(dx, dy);
+                    screenShakeIntensity *= 0.9;
+                    if (screenShakeIntensity < 0.5) screenShakeIntensity = 0;
+                }
+
+                ctx.fillStyle = 'rgba(5, 5, 5, 0.3)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                clockTicks++;
+                const spawnInterval = Math.max(35, 90 - (currentLevel * 15));
+                if (clockTicks % spawnInterval === 0) {
+                    fallingWords.push(new TargetString(Math.random() > 0.92 && currentLevel >= 2));
+                }
+
+                ctx.fillStyle = 'rgba(255,255,255,0.02)';
+                ctx.font = 'bold 8vw monospace';
+                ctx.fillText(`LVL ${currentLevel}`, canvas.width/2 - 120, canvas.height/2 + 50);
+
+                fallingWords.forEach((w, i) => {
+                    w.update(); w.draw();
+                    if (w.y > canvas.height) fallingWords.splice(i, 1);
+                });
+
+                blastSparks.forEach((s, i) => {
+                    s.update(); s.draw();
+                    if (s.alpha <= 0) blastSparks.splice(i, 1);
+                });
+
+                ctx.fillStyle = `rgba(0, 229, 255, ${0.1 + (currentCombo * 0.05)})`;
+                ctx.fillRect(0, canvas.height - 65, canvas.width, 2);
+
+                if (currentCombo > 2) {
+                    ctx.fillStyle = '#00e5ff';
+                    ctx.font = 'italic 12px monospace';
+                    ctx.fillText(`STREAK STACK: ${currentCombo}x [STABLE]`, 30, canvas.height - 85);
+                }
+
+                for(let i=0; i<3; i++) {
+                    ctx.fillStyle = i < safetyIntegrity ? '#00ff66' : 'rgba(255,255,255,0.05)';
+                    ctx.fillRect(canvas.width - 40 - (i * 20), 25, 12, 12);
+                }
+
+                ctx.restore();
+
+                if (safetyIntegrity <= 0) {
+                    sessionActive = false; 
+                    if (typeof AudioMatrix !== 'undefined') AudioMatrix.playGameOver();
+                    overScreen.style.display = 'flex';
+                } else {
+                    currentAnimationLoopId = requestAnimationFrame(cycle);
+                }
+            }
+
+            inputField.oninput = () => {
+                if (typeof AudioMatrix !== 'undefined') AudioMatrix.playTick(); 
+                const cleaned = inputField.value.trim().toUpperCase();
+                
+                fallingWords.forEach((target, index) => {
+                    if (target.text === cleaned) {
+                        if (typeof AudioMatrix !== 'undefined') AudioMatrix.playExplosion(); 
+                        
+                        currentCombo++;
+                        const multiplier = Math.min(5, Math.floor(currentCombo / 3) + 1);
+                        const pointsGained = (target.isBoss ? 500 : 100) * multiplier;
+                        
+                        score += pointsGained; 
+                        scoreLabel.innerText = String(score).padStart(4, '0');
+                        
+                        const targetLevel = Math.floor(score / 600) + 1;
+                        if (targetLevel !== currentLevel) {
+                            currentLevel = targetLevel;
+                            screenShakeIntensity = 8;
+                        }
+
+                        const sparksColor = target.isBoss ? '#ff4444' : multiplier > 2 ? '#ffaa00' : '#00e5ff';
+                        for(let i=0; i<30; i++) {
+                            blastSparks.push(new ExplosionSpark(target.x + 40, target.y, sparksColor));
+                        }
+                        
+                        fallingWords.splice(index, 1); inputField.value = "";
+                    }
+                });
+            };
+
+            const restartButton = document.getElementById('td-restart-btn');
+            if (restartButton) {
+                restartButton.setAttribute('data-no-route', 'true');
+                restartButton.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    if (typeof currentAnimationLoopId !== 'undefined' && currentAnimationLoopId) {
+                        cancelAnimationFrame(currentAnimationLoopId);
+                    }
+                    
+                    // Reset game state
+                    score = 0;
+                    safetyIntegrity = 3;
+                    currentCombo = 0;
+                    currentLevel = 1;
+                    clockTicks = 0;
+                    fallingWords = [];
+                    blastSparks = [];
+                    scoreLabel.innerText = "SCORE: 0 // FIREWALL: 100%";
+                    
+                    // Hide overlay and focus input
+                    overScreen.style.display = 'none';
+                    inputField.value = ""; 
+                    inputField.focus();
+                    
+                    // Start loop
+                    sessionActive = true;
+                    cycle();
+                };
+            }
+
+            // Game starts paused waiting for the user to click ENGAGE
+            sessionActive = false;
+    })();
+</script>
+<input type="text" id="arcade-type-input" style="opacity:0; position:absolute; top:0; left:0; z-index:-1;">
+{% endblock %}

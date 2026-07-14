@@ -1,0 +1,321 @@
+import os
+
+def rewrite_arcade_css():
+    filepath = r"c:\Users\vavac\OneDrive\Desktop\port\static\css\arcade.css"
+    new_css = """/* =========================================================
+   ARCADE ENGINE CSS - LUXURY "NAKUL.DEV" AESTHETIC OVERHAUL
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+:root {
+    --luxury-bg: #030408;
+    --luxury-surface: rgba(255, 255, 255, 0.03);
+    --luxury-border: rgba(255, 255, 255, 0.1);
+    --luxury-accent: #B0A171; /* Muted Gold */
+    --luxury-accent-hover: #C5B686;
+    --luxury-text: #ffffff;
+    --luxury-text-muted: #888888;
+    
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+/* Base Wrapper for all standalone games */
+.app-view {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--luxury-bg);
+    color: var(--luxury-text);
+    font-family: var(--font-sans);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.app-view.active {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+}
+
+/* Unified Header for Mini Projects */
+.project-header {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+}
+
+.back-btn {
+    background: transparent;
+    border: 1px solid var(--luxury-border);
+    color: var(--luxury-text);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--luxury-text);
+    color: #000;
+    border-color: var(--luxury-text);
+}
+
+.project-brand {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--luxury-accent);
+    font-style: italic;
+}
+
+/* Standalone Containers (Canvas Wrappers) */
+.gg-standalone-container,
+.td-standalone-container,
+.project-standalone-container,
+.gm-standalone-container,
+#aether-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none; /* Crucial for mobile physics */
+}
+
+/* Glassmorphism HUD Overlays */
+.golf-hud-overlay,
+.arcade-hud,
+.aether-hud,
+.gm-controls,
+.studio-wrapper {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    max-width: 400px;
+    background: rgba(10, 10, 12, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--luxury-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    pointer-events: none; /* Let clicks pass to canvas */
+    z-index: 10;
+}
+
+/* Make inner elements clickable if needed */
+.aether-hud, .gm-controls, .studio-wrapper, .arcade-hud input {
+    pointer-events: auto;
+}
+
+/* Typography Overrides */
+.golf-hud-overlay h2,
+.aether-hud h2,
+.gm-controls h2,
+.app-title-header {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+    color: var(--luxury-text);
+    font-weight: 400;
+}
+
+.golf-hud-overlay p,
+.app-desc-meta,
+.gm-controls p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--luxury-text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.golf-score,
+.score-board,
+#weather-stats,
+.studio-status {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--luxury-accent);
+    padding-top: 1rem;
+    border-top: 1px solid var(--luxury-border);
+}
+
+/* Game Over / Win Screens */
+.arcade-game-over {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 50;
+    text-align: center;
+    padding: 2rem;
+}
+
+.arcade-game-over h2 {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    margin: 0 0 1rem 0;
+    color: var(--luxury-text);
+}
+
+.arcade-game-over p {
+    font-family: var(--font-sans);
+    color: var(--luxury-text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+}
+
+.arcade-game-over .back-btn {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    background: var(--luxury-text);
+    color: #000;
+}
+
+/* Inputs & Forms */
+input[type="text"] {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--luxury-border);
+    color: var(--luxury-text);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-bottom-color: var(--luxury-accent);
+}
+
+/* Aether Dropdown */
+.aether-search-select-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.atmo-dropdown-list {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: rgba(15,15,18,0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--luxury-border);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+.atmo-dropdown-list.show { display: block; }
+.atmo-dropdown-item {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.atmo-dropdown-item:hover { background: rgba(255,255,255,0.05); color: var(--luxury-accent); }
+
+/* Chroma Keyboard Override */
+.keyboard-chassis {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 1rem;
+    background: rgba(255,255,255,0.02);
+    border-radius: 1rem;
+    border: 1px solid var(--luxury-border);
+    margin-bottom: 1.5rem;
+}
+.kbd-row { display: flex; gap: 6px; justify-content: center; }
+.kbd-key {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    min-width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--luxury-text-muted);
+    cursor: pointer; transition: all 0.1s;
+}
+.kbd-key:active, .kbd-key.active-physical {
+    background: var(--luxury-text);
+    color: #000;
+    transform: scale(0.95);
+}
+.kbd-key.spacebar { width: 220px; }
+.kbd-key.enter, .kbd-key.lshift, .kbd-key.rshift { width: 70px; }
+.kbd-key.backspace { width: 60px; }
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+    .project-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .golf-hud-overlay,
+    .arcade-hud,
+    .aether-hud,
+    .gm-controls,
+    .studio-wrapper {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+        padding: 1.5rem;
+    }
+    
+    .golf-hud-overlay h2,
+    .aether-hud h2,
+    .gm-controls h2 {
+        font-size: 2rem;
+    }
+    
+    /* Hide long descriptions on mobile to save screen space */
+    .golf-hud-overlay p,
+    .app-desc-meta {
+        display: none;
+    }
+    
+    .keyboard-chassis {
+        transform: scale(0.65);
+        transform-origin: left top;
+    }
+}
+"""
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(new_css)
+
+if __name__ == "__main__":
+    rewrite_arcade_css()

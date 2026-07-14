@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }} | Muhammed Fadhil EH{% endblock %}
+
+{% block content %}
+<div class="pt-32 max-w-7xl mx-auto px-6 mb-32 min-h-[80vh] flex flex-col">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 reveal-up">
+        <div>
+            <div class="flex items-center gap-4 mb-2">
+                <a href="{% url 'core:portfolio' %}" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-[var(--color-accent)] transition-colors">
+                    <i class="ph ph-arrow-left text-xl"></i>
+                </a>
+                <h1 class="text-4xl md:text-5xl font-display font-bold">{{ project.title }}</h1>
+            </div>
+            <p class="text-[var(--color-text-secondary)] text-lg ml-14 max-w-2xl">{{ project.description }}</p>
+        </div>
+        
+        <div class="flex flex-wrap gap-2 md:justify-end">
+            {% for tech in project.technologies %}
+                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                    {{ tech.name }}
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="relative w-full flex-grow min-h-[60vh] rounded-3xl overflow-hidden bg-black border border-gray-200 dark:border-gray-800 shadow-2xl reveal-up" style="transition-delay: 0.2s;">
+        {% block project_canvas %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Shared Audio Engine
+    const AudioMatrix = {
+        ctx: null,
+        init() {
+            if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+        },
+        playTick() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(750, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.015);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.015);
+        },
+        playDynamicKey(char) {
+            this.init();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            const filter = this.ctx.createBiquadFilter();
+            
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.05);
+            
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(800, this.ctx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.05);
+            
+            gain.gain.setValueAtTime(0, this.ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.15, this.ctx.currentTime + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+            
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.ctx.destination);
+            
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.06);
+        },
+        playExplosion() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(60, this.ctx.currentTime + 0.14);
+            gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.14);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.14);
+        },
+        playError() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(120, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.09, this.ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.15);
+        },
+        playGameOver() {
+            this.init(); const now = this.ctx.currentTime;
+            [160, 130, 95].forEach((freq, i) => {
+                const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(freq, now + i * 0.1);
+                gain.gain.setValueAtTime(0.08, now + i * 0.1);
+                gain.gain.linearRampToValueAtTime(0.001, now + i * 0.1 + 0.35);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(now + i * 0.1); osc.stop(now + i * 0.1 + 0.35);
+            });
+        },
+        playPaperLaunch() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'sine'; osc.frequency.setValueAtTime(140, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(520, this.ctx.currentTime + 0.2);
+            gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.2);
+        },
+        playWin() {
+            this.init(); const now = this.ctx.currentTime;
+            [261.63, 329.63, 392.00, 523.25].forEach((freq, i) => {
+                const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                osc.type = 'sine'; osc.frequency.setValueAtTime(freq, now + i * 0.06);
+                gain.gain.setValueAtTime(0.04, now + i * 0.06);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.22);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(now + i * 0.06); osc.stop(now + i * 0.06 + 0.22);
+            });
+        }
+    };
+    
+    let activeMouseX = 0, activeMouseY = 0;
+    
+    window.addEventListener('mousemove', (e) => {
+        activeMouseX = e.clientX;
+        activeMouseY = e.clientY;
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+            activeMouseX = e.touches[0].clientX;
+            activeMouseY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+</script>
+{% block project_scripts %}{% endblock %}
+{% endblock %}
