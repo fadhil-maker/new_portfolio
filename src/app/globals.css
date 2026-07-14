@@ -142,23 +142,21 @@
   100% { background-position: 0% 50%; }
 }
 
-@layer utilities {
-  .bg-liquid-rainbow {
-    background-image: linear-gradient(
-      270deg,
-      rgba(255, 107, 107, 0.4),
-      rgba(72, 219, 251, 0.4),
-      rgba(155, 89, 182, 0.4),
-      rgba(29, 209, 161, 0.4),
-      rgba(255, 107, 107, 0.4)
-    );
-    background-size: 300% 300%;
-    animation: liquidRainbow 12s ease-in-out infinite;
-  }
+@utility bg-liquid-rainbow {
+  background-image: linear-gradient(
+    270deg,
+    rgba(255, 107, 107, 0.4),
+    rgba(72, 219, 251, 0.4),
+    rgba(155, 89, 182, 0.4),
+    rgba(29, 209, 161, 0.4),
+    rgba(255, 107, 107, 0.4)
+  );
+  background-size: 300% 300%;
+  animation: liquidRainbow 12s ease-in-out infinite;
+}
 
-  .animate-liquid {
-    animation: liquidWobble 6s ease-in-out infinite;
-  }
+@utility animate-liquid {
+  animation: liquidWobble 6s ease-in-out infinite;
 }
 
 @keyframes liquidWobble {

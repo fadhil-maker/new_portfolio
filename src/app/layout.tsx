@@ -59,7 +59,20 @@ export default function RootLayout({
                 <i className="ph-fill ph-sun text-lg hidden dark:block"></i>
                 <i className="ph-fill ph-moon text-lg block dark:hidden"></i>
               </button>
+              {/* Mobile Menu Button */}
+              <button id="mobile-menu-btn" aria-label="Toggle Mobile Menu" className="md:hidden p-2 rounded-full border-2 border-transparent hover:border-black dark:hover:border-white bg-gray-100 dark:bg-gray-800 transition-all hover:-translate-y-0.5">
+                  <i className="ph-fill ph-list text-lg menu-icon"></i>
+                  <i className="ph-fill ph-x text-lg hidden close-icon"></i>
+              </button>
             </div>
+          </div>
+          {/* Mobile Menu Dropdown */}
+          <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 right-0 mt-4 p-6 rounded-[2rem] flex-col gap-6 text-2xl font-bold shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)] border border-white/30 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-lg backdrop-saturate-200 transition-all">
+              <a href="#about" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> About</a>
+              <a href="#experience" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Experience</a>
+              <a href="#works" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Works</a>
+              <a href="#mini-projects" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Experiments</a>
+              <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Contact</a>
           </div>
         </nav>
         {children}
@@ -117,6 +130,30 @@ export default function RootLayout({
               document.querySelectorAll('.reveal-up').forEach((el) => {
                   revealObserver.observe(el);
               });
+
+              // --- Mobile Menu Toggle ---
+              const menuBtn = document.getElementById('mobile-menu-btn');
+              const mobileMenu = document.getElementById('mobile-menu');
+              if (menuBtn && mobileMenu) {
+                  const menuIcon = menuBtn.querySelector('.menu-icon');
+                  const closeIcon = menuBtn.querySelector('.close-icon');
+                  
+                  menuBtn.addEventListener('click', () => {
+                      mobileMenu.classList.toggle('hidden');
+                      mobileMenu.classList.toggle('flex');
+                      menuIcon.classList.toggle('hidden');
+                      closeIcon.classList.toggle('hidden');
+                  });
+
+                  document.querySelectorAll('.mobile-link').forEach(link => {
+                      link.addEventListener('click', () => {
+                          mobileMenu.classList.add('hidden');
+                          mobileMenu.classList.remove('flex');
+                          menuIcon.classList.remove('hidden');
+                          closeIcon.classList.add('hidden');
+                      });
+                  });
+              }
 
               // --- Premium Custom Cursor (Desktop Only) ---
               if (window.matchMedia("(pointer: fine)").matches) {
