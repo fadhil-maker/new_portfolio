@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 
 class BaseModel(models.Model):
@@ -6,8 +7,8 @@ class BaseModel(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    is_active = models.BooleanField(default=True)
-    order = models.IntegerField(default=0)
+    is_active = models.BooleanField(default=True, db_index=True)
+    order = models.IntegerField(default=0, db_index=True)
 
     class Meta:
         abstract = True
@@ -17,9 +18,9 @@ class BaseModel(models.Model):
 class Profile(BaseModel):
     full_name = models.CharField(max_length=200)
     title = models.CharField(max_length=200, help_text='e.g. FULL STACK')
-    subtitle = models.CharField(max_length=200, help_text='e.g. DEVELOPER')
-    tagline = models.TextField(blank=True, help_text='Hero section tagline')
-    bio = models.TextField(blank=True)
+    subtitle = models.CharField(max_length=200, blank=True)
+    tagline = models.CharField(max_length=300, blank=True)
+    bio = RichTextField(blank=True)
     email = models.EmailField(blank=True)
     phone = models.CharField(max_length=20, blank=True)
     location = models.CharField(max_length=200, blank=True)
@@ -44,7 +45,7 @@ class Education(BaseModel):
     grade = models.CharField(max_length=50, blank=True, help_text='e.g. 8.65/10')
     grade_label = models.CharField(max_length=100, blank=True, help_text='e.g. CGPA')
     honours = models.CharField(max_length=200, blank=True, help_text='e.g. Honours Student')
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     is_current = models.BooleanField(default=False)
     is_internship = models.BooleanField(default=False)
     certificate_file = models.FileField(upload_to='certificates/', max_length=500, blank=True, null=True, help_text='Upload internship certificate')
@@ -59,7 +60,7 @@ class Experience(BaseModel):
     role = models.CharField(max_length=300)
     start_date = models.CharField(max_length=20)
     end_date = models.CharField(max_length=20, default='Present')
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     technologies = models.CharField(max_length=500, blank=True, help_text='Comma-separated techs')
     bullets = models.JSONField(default=list, blank=True, help_text='List of bullet points')
     is_current = models.BooleanField(default=False)
@@ -73,7 +74,7 @@ class Experience(BaseModel):
 class Project(BaseModel):
     title = models.CharField(max_length=300)
     subtitle = models.CharField(max_length=500, blank=True)
-    description = models.TextField()
+    description = RichTextField()
     technologies = models.JSONField(
         default=list,
         help_text='List of dicts: [{"name": "Python", "icon": "python.svg"}]',

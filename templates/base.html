@@ -7,10 +7,39 @@
     <title>{% block title %}Muhammed Fadhil EH | Full Stack Developer{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.{% endblock %}">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'img/logo.png' %}">
+    
     <!-- Open Graph -->
     <meta property="og:title" content="Muhammed Fadhil EH | Full Stack Developer">
-    <meta property="og:description" content="Crafting sleek, user-focused digital experiences.">
+    <meta property="og:description" content="Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://muhammedfadhil.vercel.app">
+    <meta property="og:image" content="https://muhammedfadhil.vercel.app{% static 'img/logo.png' %}">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammed Fadhil EH | Full Stack Developer">
+    <meta name="twitter:description" content="Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.">
+    <meta name="twitter:image" content="https://muhammedfadhil.vercel.app{% static 'img/logo.png' %}">
+
+    <!-- JSON-LD Schema Markup for Rank 1 SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Muhammed Fadhil EH",
+      "url": "https://muhammedfadhil.vercel.app",
+      "jobTitle": "Full Stack Developer",
+      "description": "Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.",
+      "image": "https://muhammedfadhil.vercel.app{% static 'img/logo.png' %}",
+      "sameAs": [
+        "https://github.com/fadhil-maker",
+        "https://linkedin.com/in/fadhileh"
+      ]
+    }
+    </script>
+
     
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,9 +71,9 @@
     <!-- Floating Navbar (Pure Liquid Glass) -->
     <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-50 transition-all duration-300" id="navbar">
         <div class="animate-liquid px-6 py-4 rounded-full flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)] border border-white/30 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-lg backdrop-saturate-200">
-            <a href="#" class="font-display text-xl font-bold tracking-tight hover:scale-105 transition-transform flex items-center gap-2">
-                <i class="ph-fill ph-sparkle text-[var(--color-accent)]"></i>
-                Fadhil
+            <a href="{% url 'home' %}" class="flex items-center gap-2 group">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" class="w-8 h-8 rounded group-hover:scale-105 transition-transform duration-300 shadow-lg border border-white/10">
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 font-outfit tracking-tight">Fadhil.</span>
             </a>
             
             <div class="flex items-center gap-4">
