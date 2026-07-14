@@ -81,7 +81,7 @@
                     {% if profile.profile_image %}
                         <div class="w-full h-full rounded-2xl relative">
                             <!-- Full uncropped image -->
-                            <img src="{{ profile.profile_image|media_url }}" alt="{{ profile.full_name }}" class="w-full h-full object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="{{ profile.profile_image|media_url }}" fetchpriority="high" alt="{{ profile.full_name }}" class="w-full h-full object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500">
                             <!-- Dark blend overlay directly on the picture to hide the watermark -->
                             <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.7) calc({{ profile.image_blend_amount|default:45 }}% / 2), transparent {{ profile.image_blend_amount|default:45 }}%);"></div>
                         </div>
