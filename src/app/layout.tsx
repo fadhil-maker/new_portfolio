@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import "@phosphor-icons/web/regular";
-import "@phosphor-icons/web/fill";
-import "@phosphor-icons/web/bold";
 import Script from "next/script";
 
 const inter = Inter({
@@ -60,9 +57,25 @@ export default function RootLayout({
               } else {
                   document.documentElement.classList.remove('dark');
               }
+              
+              // Asynchronously load icon stylesheets to prevent render-blocking
+              const loadFont = (href) => {
+                  const link = document.createElement('link');
+                  link.rel = 'stylesheet';
+                  link.href = href;
+                  document.head.appendChild(link);
+              };
+              loadFont('https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css');
+              loadFont('https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css');
+              loadFont('https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css');
             `,
           }}
         />
+        <noscript>
+          <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+          <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+          <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
+        </noscript>
         <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body className="relative flex min-h-screen flex-col overflow-x-hidden pt-24 selection:bg-[var(--color-accent)] selection:text-black">
