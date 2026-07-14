@@ -2,6 +2,14 @@
 {% load static %}
 {% load media_tags %}
 
+{% block extra_head %}
+    {% if profile and profile.profile_image %}
+    <!-- LCP Preload Strategy: Start downloading the hero image instantly before the DOM is even parsed -->
+    <link rel="preload" as="image" href="{{ profile.profile_image|media_url_size:400 }}" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="{{ profile.profile_image|media_url }}" media="(min-width: 769px)" fetchpriority="high">
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 
 <!-- HERO SECTION -->
