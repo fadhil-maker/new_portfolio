@@ -2,8 +2,8 @@ import os
 
 from .base import *  # noqa: F401,F403
 
-DEBUG = True
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+DEBUG = False
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 import dj_database_url
 
