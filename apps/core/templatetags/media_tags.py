@@ -28,7 +28,8 @@ def media_url(value):
         
     # Auto-optimize Cloudinary images
     if 'res.cloudinary.com' in url and '/upload/' in url:
-        if not 'f_auto' in url and not url.lower().endswith('.pdf'):
+        is_pdf_dir = '/resume/' in url.lower() or '/certificates/' in url.lower()
+        if not 'f_auto' in url and not url.lower().endswith('.pdf') and not is_pdf_dir:
             url = url.replace('/upload/', '/upload/f_auto,q_auto/')
             
     return url
