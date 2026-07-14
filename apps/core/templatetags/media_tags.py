@@ -14,12 +14,17 @@ def media_url(value):
         return ''
     
     url = ''
-    if hasattr(value, 'url'):
-        url = value.url
-    elif isinstance(value, str) and value.startswith('http'):
-        url = value
+    str_val = str(value)
+    
+    if str_val.startswith('http') or str_val.startswith('/static/'):
+        url = str_val
+    elif hasattr(value, 'url'):
+        try:
+            url = value.url
+        except Exception:
+            url = str_val
     else:
-        url = f"{settings.MEDIA_URL}{value}"
+        url = f"{settings.MEDIA_URL}{str_val}"
         
     # Auto-optimize Cloudinary images
     if 'res.cloudinary.com' in url and '/upload/' in url:
