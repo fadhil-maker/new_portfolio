@@ -8,4 +8,5 @@
 - Location: India
 
 ## Contact
-Please reach out via email or LinkedIn.
+- [Portfolio](https://muhammedfadhil.vercel.app)
+- [GitHub](https://github.com/fadhil-maker)
