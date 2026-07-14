@@ -34,7 +34,10 @@ def portfolio_view(request):
         'skills_grouped': skills_grouped,
         'certifications': certifications,
     }
-    return render(request, 'core/index.html', context)
+    response = render(request, 'core/index.html', context)
+    # Force Vercel to globally cache by dropping Vary: Cookie
+    response['Vary'] = 'Accept-Encoding'
+    return response
 
 
 @cache_control(public=True, max_age=3600, s_maxage=86400, stale_while_revalidate=604800)
@@ -43,5 +46,7 @@ def mini_project_view(request, slug):
     context = {
         'project': project,
     }
-    return render(request, f'core/mini_projects/{slug}.html', context)
+    response = render(request, f'core/mini_projects/{slug}.html', context)
+    response['Vary'] = 'Accept-Encoding'
+    return response
 
