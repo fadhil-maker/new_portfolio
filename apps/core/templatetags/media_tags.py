@@ -9,7 +9,7 @@ def media_url(field):
     if not field:
         return ''
     field_name = str(field)
-    if field_name.startswith('http'):
+    if field_name.startswith('http') or field_name.startswith('/static/'):
         return field_name
     try:
         return field.url
