@@ -13,7 +13,7 @@ export const experienceType = defineType({
     defineField({ name: 'start_date', title: 'Start Date', type: 'string' }),
     defineField({ name: 'end_date', title: 'End Date', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
-    defineField({ name: 'technologies', title: 'Technologies', type: 'string' }),
+    defineField({ name: 'technologies', title: 'Technologies', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'bullets', title: 'Bullets', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'is_current', title: 'Is Current', type: 'boolean' }),
     defineField({ name: 'is_internship', title: 'Is Internship', type: 'boolean' }),
