@@ -221,10 +221,10 @@ export default function Home() {
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Work Experience</h2>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-6 ml-6 md:ml-8 border-l-2 border-gray-200 dark:border-gray-800 pl-8 md:pl-10">
             {experience.map((exp: any, i: number) => (
-              <div key={i} className="relative mb-12 reveal-up active glass p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
-                 <div className="absolute w-4 h-4 rounded-full border-4 border-[var(--color-surface-elevated)] bg-[var(--color-accent)] -left-[2.1rem] md:-left-[2.6rem] top-8 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_var(--color-accent)]"></div>
+              <div key={i} className="relative mb-8 reveal-up active glass p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
+                 <div className="absolute w-4 h-4 rounded-full border-4 border-white dark:border-[var(--color-surface)] bg-[var(--color-accent)] -left-[calc(2rem+9px)] md:-left-[calc(2.5rem+9px)] top-8 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_var(--color-accent)]"></div>
                  <div className="text-sm font-bold text-[var(--color-accent)] mb-2 tracking-wider uppercase">{exp.start_date} – {exp.end_date}</div>
                  <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
                  <p className="text-[var(--color-text-secondary)] font-semibold text-lg mb-4">{exp.company}</p>
@@ -248,10 +248,10 @@ export default function Home() {
               <div className="text-center mt-16 mb-12 reveal-up active">
                   <h3 className="text-3xl font-bold mb-2">Internships</h3>
               </div>
-              <div className="space-y-6">
+              <div className="space-y-6 ml-6 md:ml-8 border-l-2 border-gray-200 dark:border-gray-800 pl-8 md:pl-10">
                 {internships.map((exp: any, i: number) => (
-                  <div key={i} className="relative mb-12 reveal-up active glass p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
-                     <div className="absolute w-4 h-4 rounded-full border-4 border-[var(--color-surface-elevated)] bg-[var(--color-accent)] -left-[2.1rem] md:-left-[2.6rem] top-8 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_var(--color-accent)]"></div>
+                  <div key={i} className="relative mb-8 reveal-up active glass p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
+                     <div className="absolute w-4 h-4 rounded-full border-4 border-white dark:border-[var(--color-surface)] bg-[var(--color-accent)] -left-[calc(2rem+9px)] md:-left-[calc(2.5rem+9px)] top-8 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_var(--color-accent)]"></div>
                      <div className="text-sm font-bold text-[var(--color-accent)] mb-2 tracking-wider uppercase">{exp.start_date} – {exp.end_date}</div>
                      <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
                      <p className="text-[var(--color-text-secondary)] font-semibold text-lg mb-4">{exp.company}</p>
@@ -279,7 +279,7 @@ export default function Home() {
                   <div className="flex justify-between items-start mb-6">
                     <h3 className="text-2xl font-display font-bold">{project.title}</h3>
                     {project.live_url && (
-                      <a href={project.live_url} target="_blank" className="flex items-center gap-2 text-sm font-semibold tracking-wider uppercase text-[var(--color-accent)] hover:text-black dark:hover:text-white transition-colors">
+                      <a href={project.live_url} className="flex items-center gap-2 text-sm font-semibold tracking-wider uppercase text-[var(--color-accent)] hover:text-black dark:hover:text-white transition-colors">
                         <span>Open</span>
                         <i className="ph ph-arrow-up-right"></i>
                       </a>
@@ -367,6 +367,12 @@ export default function Home() {
                             <a href={cert.credential_url} target="_blank" className="inline-flex w-fit whitespace-nowrap items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-black/20 dark:shadow-white/20">
                               <span>Show Credential</span>
                               <i className="ph-bold ph-arrow-up-right"></i>
+                            </a>
+                          )}
+                          {cert.certificate_file && (
+                            <a href={getMediaUrl(cert.certificate_file)} target="_blank" className="inline-flex w-fit whitespace-nowrap items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-black/20 dark:shadow-white/20">
+                              <i className="ph ph-image text-lg"></i>
+                              View Certificate
                             </a>
                           )}
                         </div>

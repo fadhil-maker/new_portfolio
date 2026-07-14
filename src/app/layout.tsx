@@ -16,6 +16,19 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Muhammed Fadhil EH | Full Stack Developer",
   description: "Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.",
+  openGraph: {
+    title: "Muhammed Fadhil EH | Full Stack Developer",
+    description: "Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.",
+    url: "https://muhammedfadhil.vercel.app",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muhammed Fadhil EH | Full Stack Developer",
+    description: "Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.",
+  },
+  keywords: ["Muhammed Fadhil EH", "Full Stack Developer", "Web Developer", "Portfolio", "ShanuDigiCore", "Django", "React", "Next.js"],
+  robots: "index, follow",
 };
 
 export default function RootLayout({
@@ -39,8 +52,9 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" media="print" {...{"onLoad": "this.media='all'"} as any} />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" media="print" {...{"onLoad": "this.media='all'"} as any} />
+        <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body className="relative flex min-h-screen flex-col overflow-x-hidden pt-24 selection:bg-[var(--color-accent)] selection:text-black">
         <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-50 transition-all duration-300" id="navbar">
@@ -78,7 +92,7 @@ export default function RootLayout({
         {children}
         <footer className="py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 mt-auto">
           <div className="mx-auto max-w-7xl px-6">
-              <p>&copy; 2024 | Made with <i className="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
+              <p>&copy; {new Date().getFullYear()} | Made with <i className="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
           </div>
         </footer>
         <Script
