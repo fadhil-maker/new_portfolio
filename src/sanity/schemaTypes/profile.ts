@@ -5,6 +5,7 @@ export const profileType = defineType({
   title: 'Profile',
   type: 'document',
   fields: [
+    defineField({ name: 'order', title: 'Order', type: 'number' }),
     defineField({ name: 'full_name', title: 'Full Name', type: 'string' }),
     defineField({ name: 'title', title: 'Title', type: 'string' }),
     defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),
