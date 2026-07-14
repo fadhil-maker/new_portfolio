@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load media_tags %}
 
 {% block content %}
 
@@ -49,7 +50,7 @@
                 
                 <div class="flex items-center gap-6">
                     {% if profile.resume_file %}
-                    <a href="{{ profile.resume_file.url }}" download class="btn-circle-expand border border-gray-300 dark:border-gray-700 hover:border-transparent dark:hover:border-transparent hover:text-black hover:bg-[var(--color-accent)]">
+                    <a href="{{ profile.resume_file|media_url }}" download class="btn-circle-expand border border-gray-300 dark:border-gray-700 hover:border-transparent dark:hover:border-transparent hover:text-black hover:bg-[var(--color-accent)]">
                         <i class="ph ph-download-simple text-xl"></i>
                         <span>Download Resume</span>
                     </a>
@@ -80,7 +81,7 @@
                     {% if profile.profile_image %}
                         <div class="w-full h-full rounded-2xl relative">
                             <!-- Full uncropped image -->
-                            <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}" class="w-full h-full object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="{{ profile.profile_image|media_url }}" alt="{{ profile.full_name }}" class="w-full h-full object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500">
                             <!-- Dark blend overlay directly on the picture to hide the watermark -->
                             <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.7) calc({{ profile.image_blend_amount|default:45 }}% / 2), transparent {{ profile.image_blend_amount|default:45 }}%);"></div>
                         </div>
@@ -235,7 +236,7 @@
                 <div class="flex-1 order-1 lg:order-2">
                     <div class="w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl relative border-2 border-white/20 dark:border-white/5 group">
                         {% if project.image %}
-                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="w-full h-auto object-cover object-center aspect-[4/3] md:aspect-square lg:aspect-[4/3] transition-transform duration-700 group-hover:scale-105">
+                            <img src="{{ project.image|media_url }}" alt="{{ project.title }}" class="w-full h-auto object-cover object-center aspect-[4/3] md:aspect-square lg:aspect-[4/3] transition-transform duration-700 group-hover:scale-105">
                         {% else %}
                             <div class="w-full aspect-[4/3] flex flex-col items-center justify-center p-8 text-center text-white bg-[#1a1a1a]">
                                 <i class="ph ph-layout text-6xl opacity-50 mb-4"></i>
