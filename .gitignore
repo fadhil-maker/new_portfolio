@@ -15,7 +15,6 @@ venv/
 staticfiles/
 
 # Tailwind compiled output (regenerated)
-static/css/output.css
 
 # IDE
 .vscode/
