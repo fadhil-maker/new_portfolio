@@ -71,33 +71,42 @@ body { background: var(--color-surface); color: var(--color-text-primary); }
     </nav>
 
     <main class="flex-grow">
-
-<div class="pt-32 max-w-7xl mx-auto px-6 mb-32 min-h-[80vh] flex flex-col">
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 reveal-up">
-        <div>
-            <div class="flex items-center gap-4 mb-2">
-                <a href="/" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-[var(--color-accent)] transition-colors">
-                    <i class="ph ph-arrow-left text-xl"></i>
-                </a>
-                <h1 class="text-4xl md:text-5xl font-display font-bold">Cyber Striker</h1>
+        <div class="pt-32 max-w-7xl mx-auto px-6 mb-32 min-h-[80vh] flex flex-col">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 reveal-up">
+                <div>
+                    <div class="flex items-center gap-4 mb-2">
+                        <a href="/" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-[var(--color-accent)] transition-colors">
+                            <i class="ph ph-arrow-left text-xl"></i>
+                        </a>
+                        <h1 class="text-4xl md:text-5xl font-display font-bold">Cyber Striker</h1>
+                    </div>
+                    <p class="text-[var(--color-text-secondary)] text-lg ml-14 max-w-2xl">Interactive Physics Experiment</p>
+                </div>
             </div>
-            <p class="text-[var(--color-text-secondary)] text-lg ml-14 max-w-2xl">Interactive Physics Experiment</p>
-        </div>
-        
-        <div class="flex flex-wrap gap-2 md:justify-end">
-            
-        </div>
-    </div>
 
-    <!-- Game Container -->
-    <div class="relative w-full flex-grow min-h-[60vh] rounded-3xl overflow-hidden bg-black border border-gray-200 dark:border-gray-800 shadow-2xl reveal-up" style="transition-delay: 0.2s;">
-        {% block project_canvas %}
+            <!-- Game Container -->
+            <div class="relative w-full flex-grow min-h-[60vh] rounded-3xl overflow-hidden bg-black border border-gray-200 dark:border-gray-800 shadow-2xl reveal-up" style="transition-delay: 0.2s;">
+<canvas id="striker-canvas" class="absolute inset-0 w-full h-full z-0"></canvas>
+
+<div id="cs-hud" class="absolute top-4 left-0 right-0 flex justify-center pointer-events-none z-10">
+    <div class="bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-6 py-2 text-white font-mono text-xs md:text-sm shadow-xl">
+        <span id="cs-score-readout" class="text-red-400">SYSTEM LOADED // SHIELDS: 100%</span>
+    </div>
+</div>
+
+<div id="cs-terminal-screen" class="absolute inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center text-center p-6" style="display: none;">
+    <h2 id="cs-screen-title" class="text-3xl md:text-5xl font-display font-black text-red-500 mb-4 tracking-wider">CORE INTEGRITY COLLAPSE</h2>
+    <p id="cs-screen-desc" class="text-gray-300 font-mono text-sm md:text-lg mb-8 max-w-md">Fighter chassis completely vaporized by incoming data thrash packets.</p>
+    <button id="cs-restart-btn" class="px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors text-sm">RE-MATERIALIZE SHIP</button>
+</div>
+            </div>
+        </div>
     </main>
 
     <footer class="py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800">
         <div class="mx-auto max-w-7xl px-6">
-            <p>&copy; 2024 | Made with <i class="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
+            <p>&copy; 2026 | Made with <i class="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
         </div>
     </footer>
 
@@ -138,25 +147,17 @@ body { background: var(--color-surface); color: var(--color-text-primary); }
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
             const filter = this.ctx.createBiquadFilter();
-            
             osc.type = 'square';
             osc.frequency.setValueAtTime(150, this.ctx.currentTime);
             osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.05);
-            
             filter.type = 'lowpass';
             filter.frequency.setValueAtTime(800, this.ctx.currentTime);
             filter.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.05);
-            
             gain.gain.setValueAtTime(0, this.ctx.currentTime);
             gain.gain.linearRampToValueAtTime(0.15, this.ctx.currentTime + 0.01);
             gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
-            
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.ctx.destination);
-            
-            osc.start();
-            osc.stop(this.ctx.currentTime + 0.06);
+            osc.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.06);
         },
         playExplosion() {
             this.init();
@@ -188,16 +189,6 @@ body { background: var(--color-surface); color: var(--color-text-primary); }
                 osc.start(now + i * 0.1); osc.stop(now + i * 0.1 + 0.35);
             });
         },
-        playPaperLaunch() {
-            this.init();
-            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
-            osc.type = 'sine'; osc.frequency.setValueAtTime(140, this.ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(520, this.ctx.currentTime + 0.2);
-            gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
-            osc.connect(gain); gain.connect(this.ctx.destination);
-            osc.start(); osc.stop(this.ctx.currentTime + 0.2);
-        },
         playWin() {
             this.init(); const now = this.ctx.currentTime;
             [261.63, 329.63, 392.00, 523.25].forEach((freq, i) => {
@@ -210,21 +201,11 @@ body { background: var(--color-surface); color: var(--color-text-primary); }
             });
         }
     };
-    
     let activeMouseX = 0, activeMouseY = 0;
-    
-    window.addEventListener('mousemove', (e) => {
-        activeMouseX = e.clientX;
-        activeMouseY = e.clientY;
-    });
-
-    window.addEventListener('touchmove', (e) => {
-        if (e.touches && e.touches.length > 0) {
-            activeMouseX = e.touches[0].clientX;
-            activeMouseY = e.touches[0].clientY;
-        }
-    }, { passive: true });
+    window.addEventListener('mousemove', (e) => { activeMouseX = e.clientX; activeMouseY = e.clientY; });
+    window.addEventListener('touchmove', (e) => { if (e.touches && e.touches.length > 0) { activeMouseX = e.touches[0].clientX; activeMouseY = e.touches[0].clientY; } }, { passive: true });
 </script>
+
 <script>
     (function() {
 

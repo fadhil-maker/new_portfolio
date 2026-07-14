@@ -4,10 +4,7 @@ import { getPortfolioData } from '@/lib/data';
 function getMediaUrl(path: string) {
   if (!path) return '';
   if (path.startsWith('http')) return path;
-  if (path.toLowerCase().includes('.pdf') || path.toLowerCase().includes('resume/') || path.toLowerCase().includes('certificates/')) {
-    return `/media/${path}`;
-  }
-  return `https://res.cloudinary.com/kx6awqme/image/upload/f_auto,q_auto/${path}`;
+  return `/media/${path}`;
 }
 
 export default function Home() {

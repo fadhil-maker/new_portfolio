@@ -7,18 +7,7 @@ import os
 import re
 
 projects_dir = r'backend/templates/core/mini_projects'
-mini_base_path = r'backend/templates/core/mini_project_base.html'
 output_dir = r'public/project'
-
-with open(mini_base_path, 'r', encoding='utf-8') as f:
-    mini_base = f.read()
-
-# Extract blocks from mini_base
-content_match = re.search(r'{%\s*block content\s*%}(.*?){%\s*endblock\s*%}', mini_base, re.DOTALL)
-mini_content = content_match.group(1) if content_match else ''
-
-scripts_match = re.search(r'{%\s*block extra_scripts\s*%}(.*?)\n{%\s*endblock\s*%}', mini_base, re.DOTALL)
-mini_scripts = scripts_match.group(1) if scripts_match else ''
 
 # CSS variables that match globals.css exactly
 CSS_VARIABLES = """
@@ -51,6 +40,90 @@ body { background: var(--color-surface); color: var(--color-text-primary); }
     background: rgba(255,255,255,0.04);
 }
 .reveal-up { opacity: 1; transform: none; }
+"""
+
+# Shared Audio Engine injected into all mini projects
+SHARED_AUDIO_ENGINE = """
+<script>
+    // Shared Audio Engine
+    const AudioMatrix = {
+        ctx: null,
+        init() {
+            if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+        },
+        playTick() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'triangle'; osc.frequency.setValueAtTime(750, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.015);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.015);
+        },
+        playDynamicKey(char) {
+            this.init();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            const filter = this.ctx.createBiquadFilter();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(150, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(40, this.ctx.currentTime + 0.05);
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(800, this.ctx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(100, this.ctx.currentTime + 0.05);
+            gain.gain.setValueAtTime(0, this.ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.15, this.ctx.currentTime + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+            osc.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.06);
+        },
+        playExplosion() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(60, this.ctx.currentTime + 0.14);
+            gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.14);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.14);
+        },
+        playError() {
+            this.init();
+            const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+            osc.type = 'sawtooth'; osc.frequency.setValueAtTime(120, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.09, this.ctx.currentTime);
+            gain.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+            osc.connect(gain); gain.connect(this.ctx.destination);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.15);
+        },
+        playGameOver() {
+            this.init(); const now = this.ctx.currentTime;
+            [160, 130, 95].forEach((freq, i) => {
+                const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(freq, now + i * 0.1);
+                gain.gain.setValueAtTime(0.08, now + i * 0.1);
+                gain.gain.linearRampToValueAtTime(0.001, now + i * 0.1 + 0.35);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(now + i * 0.1); osc.stop(now + i * 0.1 + 0.35);
+            });
+        },
+        playWin() {
+            this.init(); const now = this.ctx.currentTime;
+            [261.63, 329.63, 392.00, 523.25].forEach((freq, i) => {
+                const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                osc.type = 'sine'; osc.frequency.setValueAtTime(freq, now + i * 0.06);
+                gain.gain.setValueAtTime(0.04, now + i * 0.06);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.22);
+                osc.connect(gain); gain.connect(this.ctx.destination);
+                osc.start(now + i * 0.06); osc.stop(now + i * 0.06 + 0.22);
+            });
+        }
+    };
+    let activeMouseX = 0, activeMouseY = 0;
+    window.addEventListener('mousemove', (e) => { activeMouseX = e.clientX; activeMouseY = e.clientY; });
+    window.addEventListener('touchmove', (e) => { if (e.touches && e.touches.length > 0) { activeMouseX = e.touches[0].clientX; activeMouseY = e.touches[0].clientY; } }, { passive: true });
+</script>
 """
 
 TEMPLATE = """<!DOCTYPE html>
@@ -96,12 +169,30 @@ TEMPLATE = """<!DOCTYPE html>
     </nav>
 
     <main class="flex-grow">
-{content}
+        <div class="pt-32 max-w-7xl mx-auto px-6 mb-32 min-h-[80vh] flex flex-col">
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 reveal-up">
+                <div>
+                    <div class="flex items-center gap-4 mb-2">
+                        <a href="/" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-[var(--color-accent)] transition-colors">
+                            <i class="ph ph-arrow-left text-xl"></i>
+                        </a>
+                        <h1 class="text-4xl md:text-5xl font-display font-bold">{title}</h1>
+                    </div>
+                    <p class="text-[var(--color-text-secondary)] text-lg ml-14 max-w-2xl">Interactive Physics Experiment</p>
+                </div>
+            </div>
+
+            <!-- Game Container -->
+            <div class="relative w-full flex-grow min-h-[60vh] rounded-3xl overflow-hidden bg-black border border-gray-200 dark:border-gray-800 shadow-2xl reveal-up" style="transition-delay: 0.2s;">
+{project_canvas}
+            </div>
+        </div>
     </main>
 
     <footer class="py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800">
         <div class="mx-auto max-w-7xl px-6">
-            <p>&copy; 2024 | Made with <i class="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
+            <p>&copy; 2026 | Made with <i class="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
         </div>
     </footer>
 
@@ -119,7 +210,8 @@ TEMPLATE = """<!DOCTYPE html>
             }});
         }}
     </script>
-{scripts}
+{shared_audio}
+{project_scripts}
 </body>
 </html>"""
 
@@ -141,23 +233,13 @@ for filename in os.listdir(projects_dir):
     proj_scripts = re.search(r'{%\s*block project_scripts\s*%}(.*?){%\s*endblock\s*%}', proj_html, re.DOTALL)
     proj_scripts_html = proj_scripts.group(1).strip() if proj_scripts else ''
 
-    # Merge content: inject canvas into the mini_base content block
-    merged_content = mini_content.replace('{% block project_canvas %}{% endblock %}', proj_canvas_html)
-    merged_content = merged_content.replace('{{ project.title }}', title)
-    merged_content = merged_content.replace('{{ project.description }}', 'Interactive Physics Experiment')
-    merged_content = merged_content.replace("{% url 'core:portfolio' %}", '/')
-    # Remove Django tech loop
-    merged_content = re.sub(r'{%\s*for tech in project\.technologies\s*%}.*?{%\s*endfor\s*%}', '', merged_content, flags=re.DOTALL)
-
-    # Merge scripts: inject project scripts into the mini_base script block
-    merged_scripts = mini_scripts.replace('{% block project_scripts %}{% endblock %}', proj_scripts_html)
-
     # Generate the final HTML
     final_html = TEMPLATE.format(
         title=title,
         css_variables=CSS_VARIABLES,
-        content=merged_content,
-        scripts=merged_scripts,
+        project_canvas=proj_canvas_html,
+        shared_audio=SHARED_AUDIO_ENGINE,
+        project_scripts=proj_scripts_html,
     )
 
     proj_out_dir = os.path.join(output_dir, slug)

@@ -52,8 +52,8 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" media="print" {...{"onLoad": "this.media='all'"} as any} />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" media="print" {...{"onLoad": "this.media='all'"} as any} />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
         <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body className="relative flex min-h-screen flex-col overflow-x-hidden pt-24 selection:bg-[var(--color-accent)] selection:text-black">
