@@ -377,7 +377,7 @@
                             {% endif %}
                             
                             {% if cert.certificate_file %}
-                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 dark:border-gray-700 hover:border-black dark:hover:border-white text-black dark:text-white font-semibold transition-all">
+                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold hover:scale-105 transition-transform">
                                 <i class="ph-bold ph-image"></i>
                                 <span>View Certificate</span>
                             </a>
