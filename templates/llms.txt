@@ -1,0 +1,11 @@
+# Muhammed Fadhil - Full Stack Developer
+
+> Official portfolio website of Muhammed Fadhil.
+
+## Details
+- Focus: Full Stack Web Development
+- Tech Stack: Python, Django, React, Next.js, TailwindCSS
+- Location: India
+
+## Contact
+Please reach out via email or LinkedIn.
