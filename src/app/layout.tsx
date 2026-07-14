@@ -104,7 +104,9 @@ export default function RootLayout({
         {children}
         <footer className="py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 mt-auto">
           <div className="mx-auto max-w-7xl px-6">
-              <p>&copy; {new Date().getFullYear()} | Made with <Heart className="text-red-500 mx-1" weight="fill" /> by Fadhil</p>
+              <p className="flex items-center justify-center flex-wrap gap-1">
+                &copy; {new Date().getFullYear()} | Made with <Heart className="text-red-500" weight="fill" /> by Fadhil
+              </p>
           </div>
         </footer>
         <Script
