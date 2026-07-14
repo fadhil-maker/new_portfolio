@@ -84,7 +84,7 @@ export default function Home() {
             </div>
             
             <div className="reveal-up active" style={{ transitionDelay: '0.2s' }}>
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden glass p-4 rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden bg-white/10 dark:bg-black/60 backdrop-blur-2xl p-4 rotate-3 hover:rotate-0 transition-transform duration-500">
                 {profile.profile_image ? (
                   <div className="w-full h-full rounded-2xl relative">
                     <Image 
@@ -147,7 +147,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col gap-12 pb-32">
           {projects.map((project: any, i: number) => (
             <div key={i} className="lg:sticky transition-all duration-500 reveal-up active" style={{ top: `calc(10vh + ${i * 40}px)`, zIndex: i + 1 }}>
-              <div className="glass rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-12 border border-white/40 dark:border-white/10 shadow-2xl flex flex-col lg:flex-row gap-10 md:gap-16">
+              <div className="bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-12 border border-white/40 dark:border-white/10 shadow-2xl flex flex-col lg:flex-row gap-10 md:gap-16">
                 <div className="flex-1 flex flex-col justify-center order-2 lg:order-1">
                   <div className="mb-6">
                     <span className="text-[var(--color-accent)] font-bold tracking-widest uppercase text-sm mb-2 block">Project {project.number}</span>
@@ -220,7 +220,7 @@ export default function Home() {
           
           <div className="space-y-6 ml-6 md:ml-8 border-l-2 border-gray-200 dark:border-gray-800 pl-8 md:pl-10">
             {experience.map((exp: any, i: number) => (
-              <div key={i} className="relative mb-8 reveal-up active glass p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
+              <div key={i} className="relative mb-8 reveal-up active bg-white/10 dark:bg-black/60 backdrop-blur-2xl p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
                  <div className="absolute w-4 h-4 rounded-full border-4 border-white dark:border-[var(--color-surface)] bg-[var(--color-accent)] -left-[calc(2rem+9px)] md:-left-[calc(2.5rem+9px)] top-8 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_var(--color-accent)]"></div>
                  <div className="text-sm font-bold text-[var(--color-accent)] mb-2 tracking-wider uppercase">{exp.start_date} – {exp.end_date}</div>
                  <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
@@ -247,7 +247,7 @@ export default function Home() {
               </div>
               <div className="space-y-6 ml-6 md:ml-8 border-l-2 border-gray-200 dark:border-gray-800 pl-8 md:pl-10">
                 {internships.map((exp: any, i: number) => (
-                  <div key={i} className="relative mb-8 reveal-up active glass p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
+                  <div key={i} className="relative mb-8 reveal-up active bg-white/10 dark:bg-black/60 backdrop-blur-2xl p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[var(--color-accent)] transition-colors group">
                      <div className="absolute w-4 h-4 rounded-full border-4 border-white dark:border-[var(--color-surface)] bg-[var(--color-accent)] -left-[calc(2rem+9px)] md:-left-[calc(2.5rem+9px)] top-8 group-hover:scale-125 transition-transform duration-300 shadow-[0_0_15px_var(--color-accent)]"></div>
                      <div className="text-sm font-bold text-[var(--color-accent)] mb-2 tracking-wider uppercase">{exp.start_date} – {exp.end_date}</div>
                      <h3 className="text-2xl font-bold mb-1">{exp.role}</h3>
@@ -272,7 +272,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {miniProjects.map((project: any, i: number) => (
-                <div key={i} className="group glass rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-all duration-300 reveal-up active border border-white/40 dark:border-white/10 hover:border-[var(--color-accent)] hover:shadow-2xl hover:shadow-[var(--color-accent)]/20">
+                <div key={i} className="group bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-3xl p-8 flex flex-col hover:-translate-y-2 transition-all duration-300 reveal-up active border border-white/40 dark:border-white/10 hover:border-[var(--color-accent)] hover:shadow-2xl hover:shadow-[var(--color-accent)]/20">
                   <div className="flex justify-between items-start mb-6">
                     <h3 className="text-2xl font-display font-bold">{project.title}</h3>
                     {project.live_url && (
@@ -317,7 +317,7 @@ export default function Home() {
           </div>
           <div className="space-y-6">
             {education.map((edu: any, i: number) => (
-              <div key={i} className="reveal-up active p-6 md:p-8 glass rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-all group">
+              <div key={i} className="reveal-up active p-6 md:p-8 bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-all group">
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   <div className="p-4 bg-[var(--color-accent)]/10 rounded-xl shrink-0 group-hover:bg-[var(--color-accent)] group-hover:text-black dark:group-hover:text-white text-[var(--color-accent)] transition-colors">
                     <i className="ph ph-bank text-3xl"></i>
@@ -346,7 +346,7 @@ export default function Home() {
               </div>
               <div className="space-y-6">
                 {certifications.map((cert: any, i: number) => (
-                  <div key={i} className="reveal-up active p-6 md:p-8 glass rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-all group">
+                  <div key={i} className="reveal-up active p-6 md:p-8 bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-all group">
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="p-4 bg-[var(--color-accent)]/10 rounded-xl shrink-0 group-hover:bg-[var(--color-accent)] group-hover:text-black dark:group-hover:text-white text-[var(--color-accent)] transition-colors">
                         <i className="ph ph-seal-check text-3xl"></i>
