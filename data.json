@@ -1,0 +1,544 @@
+﻿[
+{
+  "model": "core.profile",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.562Z",
+    "updated_at": "2026-07-09T07:14:55.101Z",
+    "is_active": true,
+    "order": 1,
+    "full_name": "Muhammed Fadhil EH",
+    "title": "FULL STACK",
+    "subtitle": "DEVELOPER",
+    "tagline": "In a world of digital noise, clarity is a story worth telling.",
+    "bio": "I craft sleek, user-focused digital experiences with a passion for clean design and modern technology.\r\n\r\nWith a strong foundation in full-stack web development, I specialize in building fast, responsive, and elegant web applications.\r\n\r\nBeyond code, I'm driven by creativity and a desire to build things that make an impact.",
+    "email": "Fadhileh12@gmail.com",
+    "phone": "",
+    "location": "Kerala, India",
+    "github_url": "https://github.com/fadhil-maker",
+    "linkedin_url": "https://linkedin.com/in/fadhileh",
+    "instagram_url": "https://www.instagram.com/_.fadhiluu._",
+    "portfolio_url": "https://muhammedfadhil.vercel.app",
+    "profile_image": "profile/hero.jpg",
+    "image_blend_amount": 45,
+    "resume_file": "resume/Muhammed_Fadhil_-_Resume122.pdf"
+  }
+},
+{
+  "model": "core.education",
+  "pk": 7,
+  "fields": {
+    "created_at": "2026-07-04T18:47:32.513Z",
+    "updated_at": "2026-07-04T18:47:32.513Z",
+    "is_active": true,
+    "order": 1,
+    "institution": "JCT College of Engineering and Technology",
+    "degree": "B.Tech in Computer Science with Business Systems",
+    "field_of_study": "Computer Science",
+    "start_date": "2023",
+    "end_date": "2027",
+    "grade": "Pursuing",
+    "grade_label": "Status",
+    "honours": "",
+    "description": "",
+    "is_current": true,
+    "is_internship": false,
+    "certificate_file": ""
+  }
+},
+{
+  "model": "core.education",
+  "pk": 8,
+  "fields": {
+    "created_at": "2026-07-04T18:47:32.519Z",
+    "updated_at": "2026-07-04T18:47:32.519Z",
+    "is_active": true,
+    "order": 2,
+    "institution": "St. Aloysius Higher Secondary School, Elthuruth",
+    "degree": "Electronic Science",
+    "field_of_study": "Science",
+    "start_date": "2021",
+    "end_date": "2023",
+    "grade": "90%",
+    "grade_label": "Marks",
+    "honours": "",
+    "description": "",
+    "is_current": false,
+    "is_internship": false,
+    "certificate_file": ""
+  }
+},
+{
+  "model": "core.education",
+  "pk": 9,
+  "fields": {
+    "created_at": "2026-07-04T18:47:32.523Z",
+    "updated_at": "2026-07-04T18:47:32.523Z",
+    "is_active": true,
+    "order": 3,
+    "institution": "Lourde Matha EMHSS, Cherpu",
+    "degree": "SSLC",
+    "field_of_study": "General",
+    "start_date": "2020",
+    "end_date": "2021",
+    "grade": "95%",
+    "grade_label": "Marks",
+    "honours": "",
+    "description": "",
+    "is_current": false,
+    "is_internship": false,
+    "certificate_file": ""
+  }
+},
+{
+  "model": "core.experience",
+  "pk": 5,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.571Z",
+    "updated_at": "2026-07-04T18:29:29.571Z",
+    "is_active": true,
+    "order": 1,
+    "company": "ShanuDigiCore",
+    "company_url": "",
+    "role": "Digital Marketing Intern",
+    "start_date": "Jun 2024",
+    "end_date": "Aug 2024",
+    "description": "Worked on digital marketing strategies, SEO optimization, and content creation for client brands.",
+    "technologies": "SEO, Content Marketing, Social Media, Analytics",
+    "bullets": [
+      "Managed social media campaigns across multiple platforms",
+      "Performed SEO audits and implemented optimization strategies",
+      "Created engaging content for brand visibility",
+      "Analyzed campaign performance using analytics tools"
+    ],
+    "is_current": false,
+    "is_internship": false,
+    "certificate_file": ""
+  }
+},
+{
+  "model": "core.experience",
+  "pk": 6,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.575Z",
+    "updated_at": "2026-07-04T18:31:39.250Z",
+    "is_active": true,
+    "order": 1,
+    "company": "Cyborg AI Gen Automation",
+    "company_url": "",
+    "role": "Data Science Intern",
+    "start_date": "2023",
+    "end_date": "2023",
+    "description": "Implementing predictive modeling and deep data analysis on real-world datasets.",
+    "technologies": "Data Science, Predictive Modeling, Python",
+    "bullets": [
+      "Developed machine learning models for predictive analysis",
+      "Analyzed complex datasets to extract actionable insights"
+    ],
+    "is_current": false,
+    "is_internship": true,
+    "certificate_file": "certificates/data_science_cert.jpg"
+  }
+},
+{
+  "model": "core.project",
+  "pk": 19,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.579Z",
+    "updated_at": "2026-07-04T18:47:32.494Z",
+    "is_active": true,
+    "order": 1,
+    "title": "Portfolio Website",
+    "subtitle": "Personal Developer Portfolio with Modern UI",
+    "description": "A fully responsive personal portfolio featuring a modern design with interactive elements. It showcases projects, skills, education, and experience with a clean, organized layout optimized for recruiters and collaborators.",
+    "technologies": [
+      {
+        "name": "HTML",
+        "icon": "html.svg"
+      },
+      {
+        "name": "CSS",
+        "icon": "css.svg"
+      },
+      {
+        "name": "JavaScript",
+        "icon": "javascript.svg"
+      },
+      {
+        "name": "Responsive UI",
+        "icon": "responsive.svg"
+      }
+    ],
+    "github_url": "https://github.com/fadhil-maker/portfolio",
+    "live_url": "https://muhammedfadhil.vercel.app",
+    "image": "projects/portfolio.png",
+    "video_url": "",
+    "card_color": "#6366f1",
+    "number": "01",
+    "is_featured": true
+  }
+},
+{
+  "model": "core.project",
+  "pk": 20,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.583Z",
+    "updated_at": "2026-07-04T20:04:25.097Z",
+    "is_active": true,
+    "order": 2,
+    "title": "ShanuDigiCore",
+    "subtitle": "Digital Marketing & SEO Strategies",
+    "description": "Led comprehensive digital marketing campaigns, performed in-depth SEO audits, and crafted engaging content that elevated brand visibility across multiple social platforms.",
+    "technologies": [
+      {
+        "name": "SEO",
+        "icon": "seo.svg"
+      },
+      {
+        "name": "Content Marketing",
+        "icon": "content.svg"
+      },
+      {
+        "name": "Social Media",
+        "icon": "social.svg"
+      },
+      {
+        "name": "Analytics",
+        "icon": "analytics.svg"
+      }
+    ],
+    "github_url": "",
+    "live_url": "http://shanudigicore.com",
+    "image": "projects/analytics.png",
+    "video_url": "",
+    "card_color": "#10b981",
+    "number": "02",
+    "is_featured": true
+  }
+},
+{
+  "model": "core.project",
+  "pk": 25,
+  "fields": {
+    "created_at": "2026-07-04T18:58:32.794Z",
+    "updated_at": "2026-07-04T18:58:32.794Z",
+    "is_active": true,
+    "order": 0,
+    "title": "Gravity Golf",
+    "subtitle": "Mini Game",
+    "description": "Physics-based mini golf in an orbit mechanics simulator.",
+    "technologies": [],
+    "github_url": "",
+    "live_url": "/project/gravity-golf/",
+    "image": "",
+    "video_url": "",
+    "card_color": "#8b5cf6",
+    "number": "01",
+    "is_featured": false
+  }
+},
+{
+  "model": "core.project",
+  "pk": 26,
+  "fields": {
+    "created_at": "2026-07-04T18:58:32.799Z",
+    "updated_at": "2026-07-04T18:58:32.799Z",
+    "is_active": true,
+    "order": 1,
+    "title": "Aether",
+    "subtitle": "Mini Project",
+    "description": "Weather dashboard with particle effects.",
+    "technologies": [],
+    "github_url": "",
+    "live_url": "/project/aether/",
+    "image": "",
+    "video_url": "",
+    "card_color": "#f59e0b",
+    "number": "02",
+    "is_featured": false
+  }
+},
+{
+  "model": "core.project",
+  "pk": 27,
+  "fields": {
+    "created_at": "2026-07-04T18:58:32.803Z",
+    "updated_at": "2026-07-04T18:58:32.803Z",
+    "is_active": true,
+    "order": 2,
+    "title": "Chroma",
+    "subtitle": "Interactive Hardware Matrix",
+    "description": "Hardware logic puzzle where you tap keys to inject custom hex codes into a grid.",
+    "technologies": [],
+    "github_url": "",
+    "live_url": "/project/chroma/",
+    "image": "",
+    "video_url": "",
+    "card_color": "#3b82f6",
+    "number": "03",
+    "is_featured": false
+  }
+},
+{
+  "model": "core.project",
+  "pk": 28,
+  "fields": {
+    "created_at": "2026-07-04T18:58:32.807Z",
+    "updated_at": "2026-07-04T18:58:32.807Z",
+    "is_active": true,
+    "order": 3,
+    "title": "Cyber Striker",
+    "subtitle": "Canvas Space Shooter",
+    "description": "Arcade style shooter where you obliterate oncoming corrupted code cores and gather node upgrades.",
+    "technologies": [],
+    "github_url": "",
+    "live_url": "/project/cyber-striker/",
+    "image": "",
+    "video_url": "",
+    "card_color": "#ef4444",
+    "number": "04",
+    "is_featured": false
+  }
+},
+{
+  "model": "core.project",
+  "pk": 29,
+  "fields": {
+    "created_at": "2026-07-04T18:58:32.811Z",
+    "updated_at": "2026-07-04T18:58:32.811Z",
+    "is_active": true,
+    "order": 4,
+    "title": "Glyph Matrix",
+    "subtitle": "Logic Puzzle",
+    "description": "A beautiful puzzle game where you connect matching nodes without crossing their data streams.",
+    "technologies": [],
+    "github_url": "",
+    "live_url": "/project/glyph-matrix/",
+    "image": "",
+    "video_url": "",
+    "card_color": "#00e5ff",
+    "number": "05",
+    "is_featured": false
+  }
+},
+{
+  "model": "core.project",
+  "pk": 30,
+  "fields": {
+    "created_at": "2026-07-04T18:58:32.815Z",
+    "updated_at": "2026-07-04T18:58:32.815Z",
+    "is_active": true,
+    "order": 5,
+    "title": "Typing Defender",
+    "subtitle": "Keyboard Defense",
+    "description": "Rapid-fire typing game. Defend the core by typing the incoming words before they breach the firewall.",
+    "technologies": [],
+    "github_url": "",
+    "live_url": "/project/typing-defender/",
+    "image": "",
+    "video_url": "",
+    "card_color": "#ff007f",
+    "number": "06",
+    "is_featured": false
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 37,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.587Z",
+    "updated_at": "2026-07-04T18:29:29.587Z",
+    "is_active": true,
+    "order": 1,
+    "name": "Python",
+    "category": "backend",
+    "icon_svg": "<i class=\"devicon-python-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 38,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.591Z",
+    "updated_at": "2026-07-04T18:29:29.591Z",
+    "is_active": true,
+    "order": 2,
+    "name": "Django",
+    "category": "backend",
+    "icon_svg": "<i class=\"devicon-django-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 39,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.596Z",
+    "updated_at": "2026-07-04T18:29:29.596Z",
+    "is_active": true,
+    "order": 3,
+    "name": "JavaScript",
+    "category": "frontend",
+    "icon_svg": "<i class=\"devicon-javascript-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 40,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.599Z",
+    "updated_at": "2026-07-04T18:29:29.599Z",
+    "is_active": true,
+    "order": 4,
+    "name": "HTML5",
+    "category": "frontend",
+    "icon_svg": "<i class=\"devicon-html5-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 41,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.603Z",
+    "updated_at": "2026-07-04T18:29:29.603Z",
+    "is_active": true,
+    "order": 5,
+    "name": "CSS3",
+    "category": "frontend",
+    "icon_svg": "<i class=\"devicon-css3-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 42,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.607Z",
+    "updated_at": "2026-07-04T18:29:29.607Z",
+    "is_active": true,
+    "order": 6,
+    "name": "React",
+    "category": "frontend",
+    "icon_svg": "<i class=\"devicon-react-original text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 43,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.610Z",
+    "updated_at": "2026-07-04T18:29:29.610Z",
+    "is_active": true,
+    "order": 7,
+    "name": "Node.js",
+    "category": "backend",
+    "icon_svg": "<i class=\"devicon-nodejs-plain-wordmark text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 44,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.614Z",
+    "updated_at": "2026-07-04T18:29:29.614Z",
+    "is_active": true,
+    "order": 8,
+    "name": "Git",
+    "category": "tools",
+    "icon_svg": "<i class=\"devicon-git-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 45,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.618Z",
+    "updated_at": "2026-07-04T18:29:29.618Z",
+    "is_active": true,
+    "order": 9,
+    "name": "GitHub",
+    "category": "tools",
+    "icon_svg": "<i class=\"devicon-github-original text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 46,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.621Z",
+    "updated_at": "2026-07-04T18:29:29.621Z",
+    "is_active": true,
+    "order": 10,
+    "name": "Linux",
+    "category": "devops",
+    "icon_svg": "<i class=\"devicon-linux-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 47,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.624Z",
+    "updated_at": "2026-07-04T18:29:29.624Z",
+    "is_active": true,
+    "order": 11,
+    "name": "Docker",
+    "category": "devops",
+    "icon_svg": "<i class=\"devicon-docker-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 48,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.628Z",
+    "updated_at": "2026-07-04T18:29:29.628Z",
+    "is_active": true,
+    "order": 12,
+    "name": "PostgreSQL",
+    "category": "backend",
+    "icon_svg": "<i class=\"devicon-postgresql-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 49,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.632Z",
+    "updated_at": "2026-07-04T18:29:29.632Z",
+    "is_active": true,
+    "order": 13,
+    "name": "Tailwind CSS",
+    "category": "frontend",
+    "icon_svg": "<i class=\"devicon-tailwindcss-original text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.skill",
+  "pk": 50,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.636Z",
+    "updated_at": "2026-07-04T18:29:29.636Z",
+    "is_active": true,
+    "order": 15,
+    "name": "Figma",
+    "category": "tools",
+    "icon_svg": "<i class=\"devicon-figma-plain text-2xl\"></i>"
+  }
+},
+{
+  "model": "core.certification",
+  "pk": 4,
+  "fields": {
+    "created_at": "2026-07-04T18:29:29.639Z",
+    "updated_at": "2026-07-04T18:31:39.254Z",
+    "is_active": true,
+    "order": 1,
+    "title": "Python-Django Certification",
+    "issuer": "Kerala State Rutronix",
+    "issue_date": null,
+    "expiry_date": null,
+    "credential_url": "",
+    "credential_id": "",
+    "certificate_file": "certificates/django_cert.jpg"
+  }
+}
+]

@@ -1,0 +1,188 @@
+import type { Metadata } from "next";
+import { Inter, Outfit } from "next/font/google";
+import "./globals.css";
+import Script from "next/script";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Muhammed Fadhil EH | Full Stack Developer",
+  description: "Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={`${inter.variable} ${outfit.variable} scroll-smooth dark`} suppressHydrationWarning>
+      <head>
+        <Script
+          id="theme-script"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+              }
+            `,
+          }}
+        />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+      </head>
+      <body className="relative flex min-h-screen flex-col overflow-x-hidden pt-24 selection:bg-[var(--color-accent)] selection:text-black">
+        <nav className="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl z-50 transition-all duration-300" id="navbar">
+          <div className="md:animate-liquid px-6 py-4 rounded-full flex items-center justify-between shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)] border border-white/30 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-lg backdrop-saturate-200">
+            <a href="#" className="flex items-center gap-2 group">
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 font-outfit tracking-tight">Fadhil.</span>
+            </a>
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-6 text-base font-semibold">
+                <a href="#about" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> About</a>
+                <a href="#experience" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> Experience</a>
+                <a href="#works" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> Works</a>
+                <a href="#contact" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> Contact</a>
+              </div>
+              <button id="theme-toggle" className="p-2 rounded-full border-2 border-transparent hover:border-black dark:hover:border-white bg-gray-100 dark:bg-gray-800 transition-all hover:-translate-y-0.5" aria-label="Toggle Dark Mode">
+                <i className="ph-fill ph-sun text-lg hidden dark:block"></i>
+                <i className="ph-fill ph-moon text-lg block dark:hidden"></i>
+              </button>
+            </div>
+          </div>
+        </nav>
+        {children}
+        <footer className="py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 mt-auto">
+          <div className="mx-auto max-w-7xl px-6">
+              <p>&copy; 2024 | Made with <i className="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
+          </div>
+        </footer>
+        <Script
+          id="interactive-scripts"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // --- Dark/Light Mode Toggle ---
+              const themeToggleBtn = document.getElementById('theme-toggle');
+              if (themeToggleBtn) {
+                  themeToggleBtn.addEventListener('click', () => {
+                      if (document.documentElement.classList.contains('dark')) {
+                          document.documentElement.classList.remove('dark');
+                          localStorage.theme = 'light';
+                      } else {
+                          document.documentElement.classList.add('dark');
+                          localStorage.theme = 'dark';
+                      }
+                  });
+              }
+
+              // --- Navbar Scroll Effect ---
+              const navbar = document.getElementById('navbar');
+              if (navbar) {
+                  window.addEventListener('scroll', () => {
+                      if (window.scrollY > 20) {
+                          navbar.classList.add('py-2');
+                          navbar.classList.remove('py-4');
+                      } else {
+                          navbar.classList.add('py-4');
+                          navbar.classList.remove('py-2');
+                      }
+                  });
+              }
+
+              // --- Scroll Reveal Animations ---
+              const observerOptions = {
+                  root: null,
+                  rootMargin: '0px',
+                  threshold: 0.1
+              };
+              const revealObserver = new IntersectionObserver((entries, observer) => {
+                  entries.forEach(entry => {
+                      if (entry.isIntersecting) {
+                          entry.target.classList.add('active');
+                      }
+                  });
+              }, observerOptions);
+              document.querySelectorAll('.reveal-up').forEach((el) => {
+                  revealObserver.observe(el);
+              });
+
+              // --- Premium Custom Cursor (Desktop Only) ---
+              if (window.matchMedia("(pointer: fine)").matches) {
+                  const style = document.createElement('style');
+                  style.textContent = \`
+                      body, a, button { cursor: none !important; }
+                      .custom-cursor-dot {
+                          position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: var(--color-accent); border-radius: 50%; pointer-events: none; z-index: 9999;
+                          transition: width 0.2s, height 0.2s;
+                      }
+                      .custom-cursor-ring {
+                          position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 2px solid var(--color-accent); border-radius: 50%; pointer-events: none; z-index: 9998;
+                          transition: width 0.3s, height 0.3s, background 0.3s, opacity 0.3s, border-color 0.3s;
+                      }
+                      .custom-cursor-ring.hover {
+                          width: 56px; height: 56px; background: var(--color-accent); opacity: 0.15; border-color: transparent;
+                      }
+                      .custom-cursor-dot.hover {
+                          width: 0; height: 0;
+                      }
+                  \`;
+                  document.head.appendChild(style);
+                  
+                  const dot = document.createElement('div');
+                  dot.className = 'custom-cursor-dot';
+                  const ring = document.createElement('div');
+                  ring.className = 'custom-cursor-ring';
+                  
+                  document.body.appendChild(dot);
+                  document.body.appendChild(ring);
+                  
+                  let mouseX = -100, mouseY = -100;
+                  let ringX = -100, ringY = -100;
+                  
+                  window.addEventListener('mousemove', (e) => {
+                      mouseX = e.clientX;
+                      mouseY = e.clientY;
+                      dot.style.transform = \`translate(\${mouseX - 4}px, \${mouseY - 4}px)\`;
+                  });
+                  
+                  const render = () => {
+                      ringX += (mouseX - ringX) * 0.15;
+                      ringY += (mouseY - ringY) * 0.15;
+                      ring.style.transform = \`translate(\${ringX - 18}px, \${ringY - 18}px)\`;
+                      requestAnimationFrame(render);
+                  };
+                  requestAnimationFrame(render);
+                  
+                  // Use event delegation for hover
+                  document.body.addEventListener('mouseover', (e) => {
+                      if (e.target.closest('a, button, input, textarea, [role="button"]')) {
+                          ring.classList.add('hover');
+                          dot.classList.add('hover');
+                      }
+                  });
+                  document.body.addEventListener('mouseout', (e) => {
+                      if (e.target.closest('a, button, input, textarea, [role="button"]')) {
+                          ring.classList.remove('hover');
+                          dot.classList.remove('hover');
+                      }
+                  });
+              }
+            `
+          }}
+        />
+      </body>
+    </html>
+  );
+}
