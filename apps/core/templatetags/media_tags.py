@@ -1,5 +1,7 @@
+import os
 from django import template
 from django.conf import settings
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -48,3 +50,15 @@ def media_url_mobile(value):
         elif '/upload/' in url and not url.lower().endswith('.pdf'):
             return url.replace('/upload/', '/upload/c_fill,w_600,f_auto,q_auto/')
         return url
+
+@register.simple_tag
+def inline_css(path):
+    """Reads a CSS file and injects it directly into the HTML to eliminate render-blocking network requests"""
+    full_path = os.path.join(settings.BASE_DIR, 'static', path)
+    try:
+        with open(full_path, 'r', encoding='utf-8') as f:
+            return mark_safe(f"<style>{f.read()}</style>")
+    except Exception:
+        # Fallback to standard link if file reading fails
+        static_url = f"{settings.STATIC_URL}{path}"
+        return mark_safe(f'<link rel="stylesheet" href="{static_url}">')
