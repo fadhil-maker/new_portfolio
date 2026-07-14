@@ -38,3 +38,13 @@ def media_url(value):
             url = url.replace('/upload/', '/upload/c_limit,w_1000,f_auto,q_auto/')
             
     return url
+
+@register.filter
+def media_url_mobile(value):
+        """Returns the Cloudinary URL aggressively resized for mobile devices (600px width)"""
+        url = media_url(value)
+        if 'c_limit,w_1000' in url:
+            return url.replace('c_limit,w_1000', 'c_fill,w_600')
+        elif '/upload/' in url and not url.lower().endswith('.pdf'):
+            return url.replace('/upload/', '/upload/c_fill,w_600,f_auto,q_auto/')
+        return url
