@@ -26,4 +26,12 @@ SECURE_HSTS_PRELOAD = True
 # Cloudinary configuration
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL', 'cloudinary://466135576251244:Tvny9Fa6GwmILTlVKqx5G1buNhk@kx6awqme')
 os.environ['CLOUDINARY_URL'] = CLOUDINARY_URL
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
