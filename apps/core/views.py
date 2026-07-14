@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.decorators.cache import cache_control
 
 from .models import Profile, Education, Experience, Project, Skill, Certification
 
-
+@cache_control(public=True, max_age=3600, s_maxage=86400, stale_while_revalidate=604800)
 def portfolio_view(request):
     """Main portfolio page view."""
     profile = Profile.objects.filter(is_active=True).first()
@@ -36,6 +37,7 @@ def portfolio_view(request):
     return render(request, 'core/index.html', context)
 
 
+@cache_control(public=True, max_age=3600, s_maxage=86400, stale_while_revalidate=604800)
 def mini_project_view(request, slug):
     project = get_object_or_404(Project, live_url=f"/project/{slug}/")
     context = {
