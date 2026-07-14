@@ -42,14 +42,14 @@ def media_url(value):
     return url
 
 @register.filter
-def media_url_mobile(value):
-        """Returns the Cloudinary URL aggressively resized for mobile devices (600px width)"""
-        url = media_url(value)
-        if 'c_limit,w_1000' in url:
-            return url.replace('c_limit,w_1000', 'c_fill,w_600')
-        elif '/upload/' in url and not url.lower().endswith('.pdf'):
-            return url.replace('/upload/', '/upload/c_fill,w_600,f_auto,q_auto/')
-        return url
+def media_url_size(value, size):
+    """Returns the Cloudinary URL aggressively resized for a specific width"""
+    url = media_url(value)
+    if 'c_limit,w_1000' in url:
+        return url.replace('c_limit,w_1000', f'c_fill,w_{size}')
+    elif '/upload/' in url and not url.lower().endswith('.pdf'):
+        return url.replace('/upload/', f'/upload/c_fill,w_{size},f_auto,q_auto/')
+    return url
 
 @register.simple_tag
 def inline_css(path):

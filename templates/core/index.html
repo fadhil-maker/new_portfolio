@@ -81,7 +81,7 @@
                     {% if profile.profile_image %}
                         <div class="w-full h-full rounded-2xl relative">
                             <!-- Full uncropped image -->
-                            <img src="{{ profile.profile_image|media_url }}" srcset="{{ profile.profile_image|media_url_mobile }} 600w, {{ profile.profile_image|media_url }} 1000w" sizes="(max-width: 600px) 100vw, 50vw" fetchpriority="high" alt="{{ profile.full_name }}" class="w-full h-full object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500">
+                            <img src="{{ profile.profile_image|media_url }}" srcset="{{ profile.profile_image|media_url_size:400 }} 400w, {{ profile.profile_image|media_url_size:800 }} 800w, {{ profile.profile_image|media_url }} 1000w" sizes="(max-width: 768px) 100vw, 50vw" fetchpriority="high" alt="{{ profile.full_name }}" class="w-full h-full object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500">
                             <!-- Dark blend overlay directly on the picture to hide the watermark -->
                             <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.7) calc({{ profile.image_blend_amount|default:45 }}% / 2), transparent {{ profile.image_blend_amount|default:45 }}%);"></div>
                         </div>
@@ -236,8 +236,8 @@
                 <div class="flex-1 order-1 lg:order-2">
                     <div class="w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl relative border-2 border-white/20 dark:border-white/5 group">
                         {% if project.image %}
-                            <!-- LCP Bandwidth Optimization: Lazy Load off-screen images with responsive srcset -->
-                            <img src="{{ project.image|media_url }}" srcset="{{ project.image|media_url_mobile }} 600w, {{ project.image|media_url }} 1000w" sizes="(max-width: 600px) 100vw, 50vw" loading="lazy" alt="{{ project.title }}" class="w-full h-auto object-cover object-center aspect-[4/3] md:aspect-square lg:aspect-[4/3] transition-transform duration-700 group-hover:scale-105">
+                            <!-- LCP Bandwidth Optimization: Lazy Load off-screen images with precise responsive srcset -->
+                            <img src="{{ project.image|media_url }}" srcset="{{ project.image|media_url_size:400 }} 400w, {{ project.image|media_url_size:800 }} 800w, {{ project.image|media_url }} 1000w" sizes="(max-width: 768px) 100vw, 50vw" loading="lazy" alt="{{ project.title }}" class="w-full h-auto object-cover object-center aspect-[4/3] md:aspect-square lg:aspect-[4/3] transition-transform duration-700 group-hover:scale-105">
                         {% else %}
                             <div class="w-full aspect-[4/3] flex flex-col items-center justify-center p-8 text-center text-white bg-[#1a1a1a]">
                                 <i class="ph ph-layout text-6xl opacity-50 mb-4"></i>
