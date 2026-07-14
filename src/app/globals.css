@@ -75,12 +75,12 @@
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--color-accent) 0%, rgba(255,255,255,0) 60%);
     opacity: 0.15;
-    filter: blur(60px);
     z-index: -1;
     pointer-events: none;
     border-radius: 50%;
+    transform: translateZ(0); /* Force hardware acceleration */
   }
 }
 
