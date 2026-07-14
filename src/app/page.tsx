@@ -24,8 +24,8 @@ function getMediaUrl(path: string) {
   return `/media/${path}`;
 }
 
-export default function Home() {
-  const data = getPortfolioData();
+export default async function Home() {
+  const data = await getPortfolioData();
   const { profile, projects, miniProjects, skills, education, experience, internships, certifications } = data;
 
   return (
