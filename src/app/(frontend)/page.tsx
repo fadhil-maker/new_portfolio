@@ -178,7 +178,7 @@ export default async function Home() {
                     <div className="flex flex-wrap gap-2 mb-10">
                       {project.technologies.map((tech: any, tIdx: number) => (
                         <span key={tIdx} className="px-4 py-1.5 rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 font-bold text-xs md:text-sm shadow-sm backdrop-blur-md">
-                          {tech}
+                          {tech.name}
                         </span>
                       ))}
                     </div>
@@ -304,7 +304,7 @@ export default async function Home() {
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies && project.technologies.map((tech: any, tIdx: number) => (
                       <span key={tIdx} className="text-xs font-semibold px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                        {tech}
+                        {tech.name}
                       </span>
                     ))}
                   </div>

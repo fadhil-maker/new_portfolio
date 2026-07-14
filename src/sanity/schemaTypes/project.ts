@@ -16,7 +16,18 @@ export const projectType = defineType({
     defineField({ name: 'live_url', title: 'Live URL', type: 'string' }),
     defineField({ name: 'video_url', title: 'Video URL', type: 'string' }),
     defineField({ name: 'github_url', title: 'GitHub URL', type: 'string' }),
-    defineField({ name: 'technologies', title: 'Technologies', type: 'array', of: [{ type: 'string' }] }),
+    defineField({ 
+      name: 'technologies', 
+      title: 'Technologies', 
+      type: 'array', 
+      of: [{ 
+        type: 'object', 
+        fields: [
+          { name: 'name', type: 'string', title: 'Name' },
+          { name: 'icon', type: 'string', title: 'Icon' }
+        ] 
+      }] 
+    }),
     defineField({ name: 'is_featured', title: 'Is Featured', type: 'boolean' }),
     defineField({ name: 'content', title: 'Content', type: 'text' }),
   ],
