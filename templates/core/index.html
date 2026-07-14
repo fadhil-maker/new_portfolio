@@ -236,7 +236,7 @@
                 <div class="flex-1 order-1 lg:order-2">
                     <div class="w-full rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl relative border-2 border-white/20 dark:border-white/5 group">
                         {% if project.image %}
-                            <img src="{{ project.image|media_url }}" alt="{{ project.title }}" class="w-full h-auto object-cover object-center aspect-[4/3] md:aspect-square lg:aspect-[4/3] transition-transform duration-700 group-hover:scale-105">
+                            <img src="{{ project.image|media_url }}" loading="lazy" alt="{{ project.title }}" class="w-full h-auto object-cover object-center aspect-[4/3] md:aspect-square lg:aspect-[4/3] transition-transform duration-700 group-hover:scale-105">
                         {% else %}
                             <div class="w-full aspect-[4/3] flex flex-col items-center justify-center p-8 text-center text-white bg-[#1a1a1a]">
                                 <i class="ph ph-layout text-6xl opacity-50 mb-4"></i>
