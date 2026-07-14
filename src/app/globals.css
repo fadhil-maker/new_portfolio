@@ -19,7 +19,7 @@
   :root {
     --surface: #ffffff;
     --surface-elevated: #f1f5f9;
-    --accent: #6366f1; /* Premium Indigo for light mode */
+    --accent: #4338ca; /* Indigo 700 for light mode (High Contrast) */
     --text-primary: #0f172a;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
@@ -29,10 +29,10 @@
   .dark {
     --surface: #09090b; /* Deep obsidian */
     --surface-elevated: #18181b; /* Rich slate */
-    --accent: #818cf8; /* Vibrant Indigo for dark mode */
+    --accent: #a5b4fc; /* Indigo 300 for dark mode (High Contrast) */
     --text-primary: #f8fafc;
-    --text-secondary: #a1a1aa;
-    --text-muted: #52525b;
+    --text-secondary: #d4d4d8; /* Zinc 300 for better contrast on obsidian */
+    --text-muted: #a1a1aa;
     --border-color: #27272a;
   }
 

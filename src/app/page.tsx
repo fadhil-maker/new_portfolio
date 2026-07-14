@@ -1,5 +1,22 @@
 import Image from 'next/image';
-import { getPortfolioData } from '@/lib/data';
+import { getPortfolioData } from '@/lib/data';import { ArrowDown } from "@phosphor-icons/react/dist/ssr/ArrowDown";
+import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr/ArrowUpRight";
+import { Bank } from "@phosphor-icons/react/dist/ssr/Bank";
+import { Briefcase } from "@phosphor-icons/react/dist/ssr/Briefcase";
+import { CheckCircle } from "@phosphor-icons/react/dist/ssr/CheckCircle";
+import { Code } from "@phosphor-icons/react/dist/ssr/Code";
+import { DownloadSimple } from "@phosphor-icons/react/dist/ssr/DownloadSimple";
+import { EnvelopeSimple } from "@phosphor-icons/react/dist/ssr/EnvelopeSimple";
+import { GithubLogo } from "@phosphor-icons/react/dist/ssr/GithubLogo";
+import { GraduationCap } from "@phosphor-icons/react/dist/ssr/GraduationCap";
+import { Image as ImageIcon } from "@phosphor-icons/react/dist/ssr/Image";
+import { InstagramLogo } from "@phosphor-icons/react/dist/ssr/InstagramLogo";
+import { Layout } from "@phosphor-icons/react/dist/ssr/Layout";
+import { LinkedinLogo } from "@phosphor-icons/react/dist/ssr/LinkedinLogo";
+import { Medal } from "@phosphor-icons/react/dist/ssr/Medal";
+import { SealCheck } from "@phosphor-icons/react/dist/ssr/SealCheck";
+import { User } from "@phosphor-icons/react/dist/ssr/User";
+
 
 function getMediaUrl(path: string) {
   if (!path) return '';
@@ -31,7 +48,7 @@ export default function Home() {
           </h1>
           <div className="mt-12 animate-bounce reveal-up active" style={{ transitionDelay: '0.4s' }}>
             <a href="#about" aria-label="Scroll down to About section" className="text-gray-600 dark:text-gray-300 hover:text-[var(--color-accent)] transition-colors">
-              <i className="ph ph-arrow-down text-3xl"></i>
+              <ArrowDown className="text-3xl" />
             </a>
           </div>
         </div>
@@ -43,7 +60,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="reveal-up active">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--color-accent)]/10 rounded-full mb-6">
-                <i className="ph ph-user text-[var(--color-accent)]"></i>
+                <User className="text-[var(--color-accent)]" />
                 <span className="text-sm text-[var(--color-accent)] font-bold tracking-wide uppercase">About Me</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
@@ -58,7 +75,7 @@ export default function Home() {
               <div className="flex items-center gap-6">
                 {profile.resume_file && (
                   <a href={getMediaUrl(profile.resume_file)} download className="btn-circle-expand border border-gray-300 dark:border-gray-700 hover:border-transparent dark:hover:border-transparent hover:text-black hover:bg-[var(--color-accent)]">
-                    <i className="ph ph-download-simple text-xl"></i>
+                    <DownloadSimple className="text-xl" />
                     <span>Download Resume</span>
                   </a>
                 )}
@@ -66,17 +83,17 @@ export default function Home() {
                 <div className="flex items-center justify-center lg:justify-start gap-4">
                   {profile.github_url && (
                     <a href={profile.github_url} target="_blank" aria-label="GitHub Profile" className="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                      <i className="ph ph-github-logo text-xl"></i>
+                      <GithubLogo className="text-xl" />
                     </a>
                   )}
                   {profile.linkedin_url && (
                     <a href={profile.linkedin_url} target="_blank" aria-label="LinkedIn Profile" className="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                      <i className="ph ph-linkedin-logo text-xl"></i>
+                      <LinkedinLogo className="text-xl" />
                     </a>
                   )}
                   {profile.instagram_url && (
                     <a href={profile.instagram_url} target="_blank" aria-label="Instagram Profile" className="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-                      <i className="ph ph-instagram-logo text-xl"></i>
+                      <InstagramLogo className="text-xl" />
                     </a>
                   )}
                 </div>
@@ -100,7 +117,7 @@ export default function Home() {
                   </div>
                 ) : (
                   <div className="w-full h-full bg-gray-200 dark:bg-gray-800 rounded-2xl flex items-center justify-center">
-                    <i className="ph ph-user text-6xl text-gray-600 dark:text-gray-300"></i>
+                    <User className="text-6xl text-gray-600 dark:text-gray-300" />
                   </div>
                 )}
               </div>
@@ -119,7 +136,7 @@ export default function Home() {
                   {skill.icon_svg ? (
                     <div className="w-10 h-10" dangerouslySetInnerHTML={{ __html: skill.icon_svg }}></div>
                   ) : (
-                    <i className="ph ph-code text-4xl text-[var(--color-accent)]"></i>
+                    <Code className="text-4xl text-[var(--color-accent)]" />
                   )}
                   {skill.name}
                 </div>
@@ -170,14 +187,14 @@ export default function Home() {
                   <div className="flex flex-wrap gap-4 mt-auto">
                     {project.github_url && (
                       <a href={project.github_url} target="_blank" className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-black dark:border-white font-bold text-sm hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">
-                        <i className="ph ph-github-logo text-lg"></i>
+                        <GithubLogo className="text-lg" />
                         Github
                       </a>
                     )}
                     {project.live_url && (
                       <a href={project.live_url} target="_blank" className="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-transform shadow-lg shadow-black/20 dark:shadow-white/20">
                         Live Demo
-                        <i className="ph ph-arrow-up-right text-lg"></i>
+                        <ArrowUpRight className="text-lg" />
                       </a>
                     )}
                   </div>
@@ -196,7 +213,7 @@ export default function Home() {
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center text-white bg-[#1a1a1a]">
-                        <i className="ph ph-layout text-6xl opacity-50 mb-4"></i>
+                        <Layout className="text-6xl opacity-50 mb-4" />
                         <span className="font-display font-bold text-2xl tracking-widest uppercase opacity-80">{project.title}</span>
                       </div>
                     )}
@@ -213,7 +230,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16 reveal-up active">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--color-accent)]/10 rounded-full mb-4">
-              <i className="ph ph-briefcase text-[var(--color-accent)] text-lg"></i>
+              <Briefcase className="text-[var(--color-accent)] text-lg" />
               <span className="text-sm text-[var(--color-accent)] font-bold tracking-wide uppercase">Experience</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Work Experience</h2>
@@ -231,7 +248,7 @@ export default function Home() {
                    <ul className="space-y-2 mb-6">
                      {exp.bullets.map((b: string, idx: number) => (
                        <li key={idx} className="flex items-start gap-3">
-                         <i className="ph-fill ph-check-circle text-[var(--color-accent)] mt-1"></i>
+                         <CheckCircle className="text-[var(--color-accent)] mt-1" weight="fill" />
                          <span className="text-[var(--color-text-secondary)]">{b}</span>
                        </li>
                      ))}
@@ -279,7 +296,7 @@ export default function Home() {
                     {project.live_url && (
                       <a href={project.live_url} className="flex items-center gap-2 text-sm font-semibold tracking-wider uppercase text-[var(--color-accent)] hover:text-black dark:hover:text-white transition-colors">
                         <span>Open</span>
-                        <i className="ph ph-arrow-up-right"></i>
+                        <ArrowUpRight />
                       </a>
                     )}
                   </div>
@@ -294,7 +311,7 @@ export default function Home() {
                   {project.github_url && (
                     <div className="pt-4 border-t border-gray-100 dark:border-gray-800 mt-auto">
                       <a href={project.github_url} target="_blank" aria-label="GitHub Repository" className="text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors flex items-center gap-2 text-sm">
-                        <i className="ph ph-github-logo text-xl"></i>
+                        <GithubLogo className="text-xl" />
                         <span>Source Code</span>
                       </a>
                     </div>
@@ -311,7 +328,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-16 reveal-up active">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--color-accent)]/10 rounded-full mb-4">
-              <i className="ph ph-graduation-cap text-[var(--color-accent)] text-lg"></i>
+              <GraduationCap className="text-[var(--color-accent)] text-lg" />
               <span className="text-sm text-[var(--color-accent)] font-bold tracking-wide uppercase">Education</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Academic Background</h2>
@@ -321,7 +338,7 @@ export default function Home() {
               <div key={i} className="reveal-up active p-6 md:p-8 bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-transform group">
                 <div className="flex flex-col md:flex-row items-start gap-6">
                   <div className="p-4 bg-[var(--color-accent)]/10 rounded-xl shrink-0 group-hover:bg-[var(--color-accent)] group-hover:text-black dark:group-hover:text-white text-[var(--color-accent)] transition-colors">
-                    <i className="ph ph-bank text-3xl"></i>
+                    <Bank className="text-3xl" />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold mb-1">{edu.degree}</h3>
@@ -329,7 +346,7 @@ export default function Home() {
                     <p className="text-gray-700 dark:text-gray-400 text-sm mb-4 font-mono">{edu.start_date} – {edu.end_date}</p>
                     {edu.grade && (
                       <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/5 dark:bg-white/5 rounded-lg border border-black/10 dark:border-white/10 mb-4">
-                        <i className="ph-fill ph-medal text-[var(--color-accent)]"></i>
+                        <Medal className="text-[var(--color-accent)]" weight="fill" />
                         <span className="text-sm text-[var(--color-text-secondary)]">{edu.grade_label}: <strong className="text-black dark:text-white">{edu.grade}</strong></span>
                       </div>
                     )}
@@ -350,7 +367,7 @@ export default function Home() {
                   <div key={i} className="reveal-up active p-6 md:p-8 bg-white/10 dark:bg-black/60 backdrop-blur-2xl rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-transform group">
                     <div className="flex flex-col md:flex-row items-start gap-6">
                       <div className="p-4 bg-[var(--color-accent)]/10 rounded-xl shrink-0 group-hover:bg-[var(--color-accent)] group-hover:text-black dark:group-hover:text-white text-[var(--color-accent)] transition-colors">
-                        <i className="ph ph-seal-check text-3xl"></i>
+                        <SealCheck className="text-3xl" />
                       </div>
                       <div className="flex-1">
                         <h3 className="text-2xl font-bold mb-1">{cert.title}</h3>
@@ -364,12 +381,12 @@ export default function Home() {
                           {cert.credential_url && (
                             <a href={cert.credential_url} target="_blank" className="inline-flex w-fit whitespace-nowrap items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-transform shadow-lg shadow-black/20 dark:shadow-white/20">
                               <span>Show Credential</span>
-                              <i className="ph-bold ph-arrow-up-right"></i>
+                              <ArrowUpRight weight="bold" />
                             </a>
                           )}
                           {cert.certificate_file && (
                             <a href={getMediaUrl(cert.certificate_file)} target="_blank" className="inline-flex w-fit whitespace-nowrap items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-transform shadow-lg shadow-black/20 dark:shadow-white/20">
-                              <i className="ph ph-image text-lg"></i>
+                              <ImageIcon className="text-lg" />
                               View Certificate
                             </a>
                           )}
@@ -396,7 +413,7 @@ export default function Home() {
             {profile.email && (
               <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`} target="_blank" className="group relative flex flex-col items-center gap-2 hover:-translate-y-2 transition-transform duration-300">
                 <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors duration-300 mb-2">
-                  <i className="ph ph-envelope-simple text-2xl"></i>
+                  <EnvelopeSimple className="text-2xl" />
                 </div>
                 <span className="text-xl font-bold">Email Me</span>
                 <span className="text-sm text-gray-700 dark:text-gray-400">{profile.email}</span>
@@ -405,7 +422,7 @@ export default function Home() {
             {profile.linkedin_url && (
               <a href={profile.linkedin_url} target="_blank" className="group relative flex flex-col items-center gap-2 hover:-translate-y-2 transition-transform duration-300">
                 <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors duration-300 mb-2">
-                  <i className="ph ph-linkedin-logo text-2xl"></i>
+                  <LinkedinLogo className="text-2xl" />
                 </div>
                 <span className="text-xl font-bold">LinkedIn</span>
                 <span className="text-sm text-gray-700 dark:text-gray-400">Connect with me</span>
@@ -414,7 +431,7 @@ export default function Home() {
             {profile.instagram_url && (
               <a href={profile.instagram_url} target="_blank" className="group relative flex flex-col items-center gap-2 hover:-translate-y-2 transition-transform duration-300">
                 <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors duration-300 mb-2">
-                  <i className="ph ph-instagram-logo text-2xl"></i>
+                  <InstagramLogo className="text-2xl" />
                 </div>
                 <span className="text-xl font-bold">Instagram</span>
                 <span className="text-sm text-gray-700 dark:text-gray-400">Follow me</span>
@@ -423,7 +440,7 @@ export default function Home() {
             {profile.github_url && (
               <a href={profile.github_url} target="_blank" className="group relative flex flex-col items-center gap-2 hover:-translate-y-2 transition-transform duration-300">
                 <div className="w-16 h-16 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-[var(--color-accent)] group-hover:text-black transition-colors duration-300 mb-2">
-                  <i className="ph ph-github-logo text-2xl"></i>
+                  <GithubLogo className="text-2xl" />
                 </div>
                 <span className="text-xl font-bold">GitHub</span>
                 <span className="text-sm text-gray-700 dark:text-gray-400">View my code</span>

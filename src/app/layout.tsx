@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
+import Script from "next/script";import { Heart } from "@phosphor-icons/react/dist/ssr/Heart";
+import { List } from "@phosphor-icons/react/dist/ssr/List";
+import { Moon } from "@phosphor-icons/react/dist/ssr/Moon";
+import { Sparkle } from "@phosphor-icons/react/dist/ssr/Sparkle";
+import { Sun } from "@phosphor-icons/react/dist/ssr/Sun";
+import { X } from "@phosphor-icons/react/dist/ssr/X";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,25 +63,9 @@ export default function RootLayout({
               } else {
                   document.documentElement.classList.remove('dark');
               }
-              
-              // Asynchronously load icon stylesheets to prevent render-blocking
-              const loadFont = (href) => {
-                  const link = document.createElement('link');
-                  link.rel = 'stylesheet';
-                  link.href = href;
-                  document.head.appendChild(link);
-              };
-              loadFont('https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css');
-              loadFont('https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css');
-              loadFont('https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css');
             `,
           }}
         />
-        <noscript>
-          <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-          <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
-          <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
-        </noscript>
         <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body className="relative flex min-h-screen flex-col overflow-x-hidden pt-24 selection:bg-[var(--color-accent)] selection:text-black">
@@ -86,35 +76,35 @@ export default function RootLayout({
             </a>
             <div className="flex items-center gap-4">
               <div className="hidden md:flex items-center gap-6 text-base font-semibold">
-                <a href="#about" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> About</a>
-                <a href="#experience" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> Experience</a>
-                <a href="#works" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> Works</a>
-                <a href="#contact" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><i className="ph-fill ph-sparkle text-xs opacity-50"></i> Contact</a>
+                <a href="#about" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><Sparkle className="text-xs opacity-50" weight="fill" /> About</a>
+                <a href="#experience" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><Sparkle className="text-xs opacity-50" weight="fill" /> Experience</a>
+                <a href="#works" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><Sparkle className="text-xs opacity-50" weight="fill" /> Works</a>
+                <a href="#contact" className="hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"><Sparkle className="text-xs opacity-50" weight="fill" /> Contact</a>
               </div>
               <button id="theme-toggle" className="p-2 rounded-full border-2 border-transparent hover:border-black dark:hover:border-white bg-gray-100 dark:bg-gray-800 transition-all hover:-translate-y-0.5" aria-label="Toggle Dark Mode">
-                <i className="ph-fill ph-sun text-lg hidden dark:block"></i>
-                <i className="ph-fill ph-moon text-lg block dark:hidden"></i>
+                <Sun className="text-lg hidden dark:block" weight="fill" />
+                <Moon className="text-lg block dark:hidden" weight="fill" />
               </button>
               {/* Mobile Menu Button */}
               <button id="mobile-menu-btn" aria-label="Toggle Mobile Menu" className="md:hidden p-2 rounded-full border-2 border-transparent hover:border-black dark:hover:border-white bg-gray-100 dark:bg-gray-800 transition-all hover:-translate-y-0.5">
-                  <i className="ph-fill ph-list text-lg menu-icon"></i>
-                  <i className="ph-fill ph-x text-lg hidden close-icon"></i>
+                  <List className="text-lg menu-icon" weight="fill" />
+                  <X className="text-lg hidden close-icon" weight="fill" />
               </button>
             </div>
           </div>
           {/* Mobile Menu Dropdown */}
           <div id="mobile-menu" className="hidden md:hidden absolute top-full left-0 right-0 mt-4 p-6 rounded-[2rem] flex-col gap-6 text-2xl font-bold shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,0.4)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)] border border-white/30 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-lg backdrop-saturate-200 transition-all">
-              <a href="#about" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> About</a>
-              <a href="#experience" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Experience</a>
-              <a href="#works" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Works</a>
-              <a href="#mini-projects" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Experiments</a>
-              <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><i className="ph-fill ph-sparkle text-xl text-black dark:text-white"></i> Contact</a>
+              <a href="#about" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><Sparkle className="text-xl text-black dark:text-white" weight="fill" /> About</a>
+              <a href="#experience" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><Sparkle className="text-xl text-black dark:text-white" weight="fill" /> Experience</a>
+              <a href="#works" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><Sparkle className="text-xl text-black dark:text-white" weight="fill" /> Works</a>
+              <a href="#mini-projects" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><Sparkle className="text-xl text-black dark:text-white" weight="fill" /> Experiments</a>
+              <a href="#contact" className="hover:text-black dark:hover:text-white transition-colors mobile-link flex items-center gap-3 text-black dark:text-white drop-shadow-sm"><Sparkle className="text-xl text-black dark:text-white" weight="fill" /> Contact</a>
           </div>
         </nav>
         {children}
         <footer className="py-8 text-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 mt-auto">
           <div className="mx-auto max-w-7xl px-6">
-              <p>&copy; {new Date().getFullYear()} | Made with <i className="ph-fill ph-heart text-red-500 mx-1"></i> by Fadhil</p>
+              <p>&copy; {new Date().getFullYear()} | Made with <Heart className="text-red-500 mx-1" weight="fill" /> by Fadhil</p>
           </div>
         </footer>
         <Script
