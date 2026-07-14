@@ -9,6 +9,7 @@ urlpatterns = [
     path('hq-portal/', admin.site.urls),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml', content_type='application/xml')),
+    path('google85acb267c92167a0.html', TemplateView.as_view(template_name='google85acb267c92167a0.html', content_type='text/html')),
     path('', include('apps.core.urls')),
 ]
 
