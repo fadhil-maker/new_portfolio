@@ -56,9 +56,13 @@
     <!-- Tailwind CSS (compiled) -->
     <link rel="stylesheet" href="{% static 'css/output.css' %}?v=4">
     
-    <!-- Phosphor Icons for UI (Direct CSS to avoid JS execution and massive unused weights) -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <!-- Phosphor Icons for UI (Direct CSS, Deferred to eliminate render-blocking) -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    </noscript>
           
     {% block extra_head %}{% endblock %}
     
