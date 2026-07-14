@@ -345,6 +345,66 @@
     </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+{% if certifications %}
+<section id="certifications" class="py-24 relative overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]">
+    <div class="max-w-4xl mx-auto px-6">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-16 reveal-up">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-[var(--color-accent)]/10 rounded-full mb-4">
+                <i class="ph ph-certificate text-[var(--color-accent)] text-lg"></i>
+                <span class="text-sm text-[var(--color-accent)] font-bold tracking-wide uppercase">Licenses & Certifications</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Professional Certifications</h2>
+        </div>
+
+        <!-- Certification Cards -->
+        <div class="space-y-6">
+            {% for cert in certifications %}
+            <div class="reveal-up p-6 md:p-8 glass dark:glass rounded-2xl border border-white/20 dark:border-white/10 hover:border-[var(--color-accent)] transition-all group">
+                <div class="flex flex-col md:flex-row items-start gap-6">
+                    <div class="p-4 bg-[var(--color-accent)]/10 rounded-xl shrink-0 group-hover:bg-[var(--color-accent)] group-hover:text-black dark:group-hover:text-white text-[var(--color-accent)] transition-colors">
+                        <i class="ph ph-seal-check text-3xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-1">{{ cert.title }}</h3>
+                        <p class="text-[var(--color-accent)] font-bold text-lg mb-2">{{ cert.issuer }}</p>
+                        
+                        <p class="text-gray-500 text-sm mb-4 font-mono">
+                            Issued: {{ cert.issue_date|date:"M Y" }}
+                            {% if cert.expiry_date %} – Expires: {{ cert.expiry_date|date:"M Y" }}{% endif %}
+                        </p>
+
+                        {% if cert.credential_id %}
+                        <p class="text-sm text-[var(--color-text-secondary)] mb-4 font-mono opacity-80">Credential ID: {{ cert.credential_id }}</p>
+                        {% endif %}
+                        
+                        <div class="flex flex-wrap items-center gap-4 mt-4">
+                            {% if cert.credential_url %}
+                            <a href="{{ cert.credential_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold hover:scale-105 transition-transform">
+                                <span>Show Credential</span>
+                                <i class="ph-bold ph-arrow-up-right"></i>
+                            </a>
+                            {% endif %}
+                            
+                            {% if cert.certificate_file %}
+                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-black/20 dark:border-white/20 hover:border-[var(--color-accent)] text-black dark:text-white hover:text-[var(--color-accent)] font-semibold transition-colors">
+                                <i class="ph-bold ph-image"></i>
+                                <span>View Certificate</span>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
 <!-- CONTACT -->
 <section id="contact" class="py-32 md:py-48 relative overflow-hidden bg-white dark:bg-[#050505]">
     <div class="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.02]" style="background-image: radial-gradient(circle at center, black 1px, transparent 1px); background-size: 40px 40px;"></div>
