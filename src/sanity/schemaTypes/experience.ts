@@ -17,7 +17,5 @@ export const experienceType = defineType({
     defineField({ name: 'bullets', title: 'Bullets', type: 'array', of: [{ type: 'string' }] }),
     defineField({ name: 'is_current', title: 'Is Current', type: 'boolean' }),
     defineField({ name: 'is_internship', title: 'Is Internship', type: 'boolean' }),
-    defineField({ name: 'certificate_file', title: 'Certificate File', type: 'file' }),
-    defineField({ name: 'company_logo', title: 'Company Logo', type: 'image' }),
   ],
 });

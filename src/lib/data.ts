@@ -18,16 +18,8 @@ export async function getPortfolioData() {
     },
     "skills": *[_type == "skill"] | order(order asc),
     "education": *[_type == "education"] | order(order asc),
-    "experience": *[_type == "experience" && is_internship != true] | order(order asc) {
-      ...,
-      "company_logo": company_logo.asset->url,
-      "certificate_file": certificate_file.asset->url
-    },
-    "internships": *[_type == "experience" && is_internship == true] | order(order asc) {
-      ...,
-      "company_logo": company_logo.asset->url,
-      "certificate_file": certificate_file.asset->url
-    },
+    "experience": *[_type == "experience" && is_internship != true] | order(order asc),
+    "internships": *[_type == "experience" && is_internship == true] | order(order asc),
     "certifications": *[_type == "certification"] | order(order asc) {
       ...,
       "certificate_file": certificate_file.asset->url
