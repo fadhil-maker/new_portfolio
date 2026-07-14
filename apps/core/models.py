@@ -27,9 +27,9 @@ class Profile(BaseModel):
     linkedin_url = models.URLField(blank=True)
     instagram_url = models.URLField(blank=True)
     portfolio_url = models.URLField(blank=True)
-    profile_image = models.ImageField(upload_to='profile/', blank=True, null=True)
+    profile_image = models.ImageField(upload_to='profile/', max_length=500, blank=True, null=True)
     image_blend_amount = models.IntegerField(default=45, help_text='Percentage of picture covered by the bottom fade (e.g. 45)')
-    resume_file = models.FileField(upload_to='resume/', blank=True, null=True, help_text='Upload your resume PDF')
+    resume_file = models.FileField(upload_to='resume/', max_length=500, blank=True, null=True, help_text='Upload your resume PDF')
 
     def __str__(self):
         return self.full_name
@@ -47,7 +47,7 @@ class Education(BaseModel):
     description = models.TextField(blank=True)
     is_current = models.BooleanField(default=False)
     is_internship = models.BooleanField(default=False)
-    certificate_file = models.FileField(upload_to='certificates/', blank=True, null=True, help_text='Upload internship certificate')
+    certificate_file = models.FileField(upload_to='certificates/', max_length=500, blank=True, null=True, help_text='Upload internship certificate')
 
     def __str__(self):
         return f'{self.degree} - {self.institution}'
@@ -64,7 +64,7 @@ class Experience(BaseModel):
     bullets = models.JSONField(default=list, blank=True, help_text='List of bullet points')
     is_current = models.BooleanField(default=False)
     is_internship = models.BooleanField(default=False)
-    certificate_file = models.FileField(upload_to='certificates/', blank=True, null=True, help_text='Upload internship certificate')
+    certificate_file = models.FileField(upload_to='certificates/', max_length=500, blank=True, null=True, help_text='Upload internship certificate')
 
     def __str__(self):
         return f'{self.role} at {self.company}'
@@ -80,7 +80,7 @@ class Project(BaseModel):
     )
     github_url = models.URLField(blank=True)
     live_url = models.URLField(blank=True)
-    image = models.ImageField(upload_to='projects/', blank=True, null=True)
+    image = models.ImageField(upload_to='projects/', max_length=500, blank=True, null=True)
     video_url = models.URLField(blank=True)
     card_color = models.CharField(max_length=7, default='#6366f1', help_text='Hex color for card bg')
     number = models.CharField(max_length=5, default='01', help_text='Display number like 01, 02')
@@ -114,7 +114,7 @@ class Certification(BaseModel):
     expiry_date = models.DateField(null=True, blank=True)
     credential_url = models.URLField(blank=True)
     credential_id = models.CharField(max_length=200, blank=True)
-    certificate_file = models.FileField(upload_to='certificates/', blank=True, null=True)
+    certificate_file = models.FileField(upload_to='certificates/', max_length=500, blank=True, null=True)
 
     def __str__(self):
         return f'{self.title} - {self.issuer}'
