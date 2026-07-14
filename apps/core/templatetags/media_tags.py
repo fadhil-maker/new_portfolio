@@ -35,6 +35,6 @@ def media_url(value):
             url += '.pdf'
             
         if not 'f_auto' in url and not url.lower().endswith('.pdf') and not is_pdf_dir:
-            url = url.replace('/upload/', '/upload/f_auto,q_auto/')
+            url = url.replace('/upload/', '/upload/c_limit,w_1000,f_auto,q_auto/')
             
     return url
