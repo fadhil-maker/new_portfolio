@@ -55,10 +55,11 @@
     <link rel="stylesheet" href="{% static 'css/output.css' %}?v=4">
     
     <!-- Phosphor Icons for UI -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
     
-    <!-- Devicons for Tech Stack Logos -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <!-- Devicons for Tech Stack Logos (Deferred for Performance) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"></noscript>
           
     {% block extra_head %}{% endblock %}
     
@@ -95,7 +96,7 @@
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-full border-2 border-transparent hover:border-black dark:hover:border-white bg-gray-100 dark:bg-gray-800 transition-all hover:-translate-y-0.5">
+                <button id="mobile-menu-btn" aria-label="Toggle Mobile Menu" class="md:hidden p-2 rounded-full border-2 border-transparent hover:border-black dark:hover:border-white bg-gray-100 dark:bg-gray-800 transition-all hover:-translate-y-0.5">
                     <i class="ph-fill ph-list text-lg menu-icon"></i>
                     <i class="ph-fill ph-x text-lg hidden close-icon"></i>
                 </button>

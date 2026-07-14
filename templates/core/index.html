@@ -56,19 +56,19 @@
                     </a>
                     {% endif %}
                     
-                    <div class="flex gap-4">
+                    <div class="flex items-center justify-center lg:justify-start gap-4">
                         {% if profile.github_url %}
-                        <a href="{{ profile.github_url }}" target="_blank" class="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <a href="{{ profile.github_url }}" target="_blank" aria-label="GitHub Profile" class="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                             <i class="ph ph-github-logo text-xl"></i>
                         </a>
                         {% endif %}
                         {% if profile.linkedin_url %}
-                        <a href="{{ profile.linkedin_url }}" target="_blank" class="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <a href="{{ profile.linkedin_url }}" target="_blank" aria-label="LinkedIn Profile" class="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                             <i class="ph ph-linkedin-logo text-xl"></i>
                         </a>
                         {% endif %}
                         {% if profile.instagram_url %}
-                        <a href="{{ profile.instagram_url }}" target="_blank" class="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <a href="{{ profile.instagram_url }}" target="_blank" aria-label="Instagram Profile" class="p-3 rounded-full border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
                             <i class="ph ph-instagram-logo text-xl"></i>
                         </a>
                         {% endif %}
