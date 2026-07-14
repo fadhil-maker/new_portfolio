@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Script from "next/script";import { Heart } from "@phosphor-icons/react/dist/ssr/Heart";
 import { List } from "@phosphor-icons/react/dist/ssr/List";
 import { Moon } from "@phosphor-icons/react/dist/ssr/Moon";
