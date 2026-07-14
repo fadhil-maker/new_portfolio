@@ -370,14 +370,14 @@
                         
                         <div class="flex flex-wrap items-center gap-4 mt-4">
                             {% if cert.credential_url %}
-                            <a href="{{ cert.credential_url }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold hover:scale-105 transition-transform">
+                            <a href="{{ cert.credential_url }}" target="_blank" class="inline-flex w-fit whitespace-nowrap items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-black/20 dark:shadow-white/20">
                                 <span>Show Credential</span>
                                 <i class="ph-bold ph-arrow-up-right"></i>
                             </a>
                             {% endif %}
                             
                             {% if cert.certificate_file %}
-                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-transform shadow-lg shadow-black/20 dark:shadow-white/20">
+                            <a href="{{ cert.certificate_file|media_url }}" target="_blank" class="inline-flex w-fit whitespace-nowrap items-center justify-center gap-2 px-6 py-3 rounded-full bg-black text-white dark:bg-white dark:text-black font-bold text-sm hover:scale-105 transition-all shadow-lg shadow-black/20 dark:shadow-white/20">
                                 <i class="ph ph-image text-lg"></i>
                                 View Certificate
                             </a>
