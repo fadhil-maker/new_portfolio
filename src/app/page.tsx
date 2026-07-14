@@ -92,6 +92,7 @@ export default function Home() {
                       alt={profile.full_name} 
                       fill
                       priority
+                      fetchPriority="high"
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover rounded-2xl filter grayscale hover:grayscale-0 transition-all duration-500" 
                     />

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import "@phosphor-icons/web/regular";
+import "@phosphor-icons/web/fill";
+import "@phosphor-icons/web/bold";
 import Script from "next/script";
 
 const inter = Inter({
@@ -21,6 +24,14 @@ export const metadata: Metadata = {
     description: "Portfolio of Muhammed Fadhil EH, a Full Stack Developer specializing in crafting sleek, user-focused digital experiences.",
     url: "https://muhammedfadhil.vercel.app",
     type: "website",
+    images: [
+      {
+        url: "https://muhammedfadhil.vercel.app/media/profile/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Muhammed Fadhil EH - Full Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -52,8 +63,6 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
         <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body className="relative flex min-h-screen flex-col overflow-x-hidden pt-24 selection:bg-[var(--color-accent)] selection:text-black">
