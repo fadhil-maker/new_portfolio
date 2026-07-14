@@ -10,13 +10,11 @@ export async function getPortfolioData() {
     },
     "projects": *[_type == "project" && is_featured == true] | order(order asc) {
       ...,
-      "image": image.asset->url,
-      "thumbnail": thumbnail.asset->url
+      "image": image.asset->url
     },
     "miniProjects": *[_type == "project" && is_featured != true] | order(order asc) {
       ...,
-      "image": image.asset->url,
-      "thumbnail": thumbnail.asset->url
+      "image": image.asset->url
     },
     "skills": *[_type == "skill"] | order(order asc),
     "education": *[_type == "education"] | order(order asc),
