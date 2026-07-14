@@ -46,7 +46,7 @@ export default function Home() {
               </>
             )}
           </h1>
-          <div className="mt-12 animate-bounce reveal-up active" style={{ transitionDelay: '0.4s' }}>
+          <div className="mt-12 reveal-up active" style={{ transitionDelay: '0.4s' }}>
             <a href="#about" aria-label="Scroll down to About section" className="text-gray-600 dark:text-gray-300 hover:text-[var(--color-accent)] transition-colors">
               <ArrowDown className="text-3xl" />
             </a>
