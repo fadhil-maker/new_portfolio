@@ -182,11 +182,17 @@ export default function RootLayout({
                       });
                   });
               }
-
-              // --- Premium Custom Cursor (Desktop Only) ---
+            `
+          }}
+        />
+        <Script
+          id="custom-cursor"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
               if (window.matchMedia("(pointer: fine)").matches) {
                   const style = document.createElement('style');
-                  style.textContent = \`
+                  style.innerHTML = \`
                       body, a, button { cursor: none !important; }
                       .custom-cursor-dot {
                           position: fixed; top: 0; left: 0; width: 8px; height: 8px; background: var(--color-accent); border-radius: 50%; pointer-events: none; z-index: 9999;
@@ -230,7 +236,6 @@ export default function RootLayout({
                   };
                   requestAnimationFrame(render);
                   
-                  // Use event delegation for hover
                   document.body.addEventListener('mouseover', (e) => {
                       if (e.target.closest('a, button, input, textarea, [role="button"]')) {
                           ring.classList.add('hover');
