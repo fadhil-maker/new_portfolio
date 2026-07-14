@@ -16,7 +16,6 @@ export const educationType = defineType({
     defineField({ name: 'honours', title: 'Honours', type: 'string' }),
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'is_current', title: 'Is Current', type: 'boolean' }),
-    defineField({ name: 'is_internship', title: 'Is Internship', type: 'boolean' }),
     defineField({ name: 'certificate_file', title: 'Certificate File', type: 'file' }),
   ],
 });

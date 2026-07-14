@@ -29,6 +29,5 @@ export const projectType = defineType({
       }] 
     }),
     defineField({ name: 'is_featured', title: 'Is Featured', type: 'boolean' }),
-    defineField({ name: 'content', title: 'Content', type: 'text' }),
   ],
 });
